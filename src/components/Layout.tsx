@@ -1,54 +1,12 @@
-import React, { useEffect, useState } from "react";
-import {
-  Building2,
-  Car,
-  ChevronDown,
-  LayoutDashboard,
-  Link2,
-  MapPin,
-  Navigation,
-  ShieldCheck,
-  Ticket,
-  Wrench,
-} from "lucide-react";
-import { cn } from "./ui";
+import React from "react";
+import { Car, Link2, MapPin, Wrench } from "lucide-react";
 import { BackdropDecor } from "./ConnectGate";
 
 export type PortalId = "main" | "booking" | "partner" | "admin" | "driver";
 
-const PORTALS: {
-  id: PortalId;
-  label: string;
-  short: string;
-  path: string;
-  icon: React.ComponentType<{ className?: string }>;
-}[] = [
-  { id: "main", label: "Beranda", short: "Home", path: "./index.html", icon: LayoutDashboard },
-  { id: "booking", label: "Booking", short: "Booking", path: "./booking.html", icon: Ticket },
-  { id: "partner", label: "Partner", short: "Partner", path: "./partner.html", icon: Building2 },
-  { id: "admin", label: "Admin HQ", short: "Admin", path: "./admin.html", icon: ShieldCheck },
-  { id: "driver", label: "Driver", short: "Driver", path: "./driver.html", icon: Navigation },
-];
-
-export function currentPortalId(): PortalId {
-  const p = window.location.pathname.split("/").pop() || "index.html";
-  if (p === "booking.html") return "booking";
-  if (p === "partner.html") return "partner";
-  if (p === "admin.html") return "admin";
-  if (p === "driver.html") return "driver";
-  return "main";
-}
-
-/** Topbar brand + navigasi portal (link <a>, bukan tab state). */
+/** Topbar brand + (tanpa menu portal) — navigasi antar portal diakses lewat URL langsung. */
 export function TopBar({ active }: { active: PortalId }) {
-  const [open, setOpen] = useState(false);
-  useEffect(() => {
-    const onResize = () => window.innerWidth >= 768 && setOpen(false);
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
-  const current = PORTALS.find((p) => p.id === active) ?? PORTALS[0];
-
+  void active;
   return (
     <header className="sticky top-0 z-40 border-b border-white/60 bg-cream/80 backdrop-blur-xl">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -62,61 +20,6 @@ export function TopBar({ active }: { active: PortalId }) {
               <span className="mt-1 block text-[10px] font-bold uppercase tracking-[0.16em] text-stone-400">NusaTravelLab</span>
             </span>
           </a>
-
-          {/* Nav (desktop) */}
-          <nav className="hidden md:flex items-center gap-1 rounded-2xl bg-white/70 p-1 ring-1 ring-stone-200/70 shadow-sm">
-            {PORTALS.map((p) => {
-              const Icon = p.icon;
-              const isActive = p.id === active;
-              return (
-                <a
-                  key={p.id}
-                  href={p.path}
-                  className={cn(
-                    "flex items-center gap-2 rounded-xl px-3.5 py-2 transition-all",
-                    isActive ? "bg-gradient-to-r from-brand-500 to-brand-400 text-white shadow-warm" : "text-stone-500 hover:bg-stone-100 hover:text-stone-800"
-                  )}
-                >
-                  <Icon className="h-4 w-4" />
-                  <span className="text-[13px] font-extrabold">{p.label}</span>
-                </a>
-              );
-            })}
-          </nav>
-
-          {/* Dropdown (mobile) */}
-          <div className="md:hidden relative">
-            <button
-              onClick={() => setOpen((o) => !o)}
-              className="flex items-center gap-1.5 rounded-xl bg-white/80 border border-stone-200 px-3 py-2 text-[13px] font-bold text-stone-700"
-            >
-              <current.icon className="h-4 w-4 text-brand-500" />
-              {current.short}
-              <ChevronDown className={cn("h-4 w-4 text-stone-400 transition", open && "rotate-180")} />
-            </button>
-            {open && (
-              <div className="absolute right-0 mt-2 w-48 rounded-2xl bg-white p-1.5 shadow-card-lg ring-1 ring-stone-100 animate-pop">
-                {PORTALS.map((p) => {
-                  const Icon = p.icon;
-                  const isActive = p.id === active;
-                  return (
-                    <a
-                      key={p.id}
-                      href={p.path}
-                      onClick={() => setOpen(false)}
-                      className={cn(
-                        "flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-[13px] font-bold transition",
-                        isActive ? "bg-brand-50 text-brand-700" : "text-stone-600 hover:bg-stone-50"
-                      )}
-                    >
-                      <Icon className="h-4 w-4" />
-                      {p.label}
-                    </a>
-                  );
-                })}
-              </div>
-            )}
-          </div>
         </div>
       </div>
     </header>

@@ -38,6 +38,29 @@ export async function fetchVendors(): Promise<Vendor[]> {
   return (data ?? []) as Vendor[];
 }
 
+export type NewVendor = {
+  business_name: string;
+  owner_name: string;
+  email: string;
+  phone: string;
+  city: string;
+  kyc_nib?: string | null;
+  kyc_npwp?: string | null;
+  kyc_insurance?: string | null;
+};
+
+/** Daftarkan vendor baru (status awal = 'pending' antrian QC Admin). */
+export async function insertVendor(v: NewVendor): Promise<Vendor> {
+  const sb = getClient();
+  const { data, error } = await sb
+    .from("vendors")
+    .insert({ ...v, status: "pending", wallet_balance: 0 })
+    .select()
+    .single();
+  if (error) fail(error, "Gagal mendaftarkan vendor");
+  return data as Vendor;
+}
+
 export async function updateVendorStatus(
   id: string,
   status: Vendor["status"]
