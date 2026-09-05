@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from "react";
 import {
-  Car,
   CheckCircle2,
   Database,
   FileKey2,
@@ -9,6 +8,7 @@ import {
   TerminalSquare,
   Unplug,
 } from "lucide-react";
+import { BrandLogo } from "./Logo";
 import {
   clearRuntimeConfig,
   getActiveConfig,
@@ -73,14 +73,10 @@ function ConnectGate({ onSaved }: { onSaved: () => void }) {
     <div className="relative min-h-screen">
       <BackdropDecor />
       <div className="mx-auto max-w-5xl px-4 sm:px-6 py-8 sm:py-14">
-        <div className="flex items-center gap-3 animate-rise">
-          <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-brand-500 to-leaf-500 text-white shadow-warm-lg">
-            <Car className="h-6 w-6" />
-          </span>
-          <div>
-            <h1 className="text-2xl font-extrabold tracking-tight text-lagoon-900">RuteTrip Platform</h1>
-            <p className="text-[12px] font-bold uppercase tracking-[0.16em] text-stone-400">RuteTrip · hubungkan database</p>
-          </div>
+        <div className="flex flex-col items-center gap-3 text-center animate-rise">
+          <BrandLogo className="w-56 sm:w-72" />
+          <h1 className="text-2xl font-extrabold tracking-tight text-lagoon-900">RuteTrip Platform</h1>
+          <p className="text-[12px] font-bold uppercase tracking-[0.16em] text-stone-400">RuteTrip · hubungkan database</p>
         </div>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-[1.1fr_1fr] items-start">

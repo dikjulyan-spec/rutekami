@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "RuteKami Platform (NusaTravelLab) — ekosistem transportasi multi-portal: Customer, Partner, Super Admin HQ, Driver. React 18 + TypeScript + Vite 6 + Supabase.",
+  "description": "RuteTrip Platform (NusaTravelLab) — ekosistem transportasi multi-portal: Customer, Partner, Super Admin HQ, Driver. React 18 + TypeScript + Vite 6 + Supabase.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

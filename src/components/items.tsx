@@ -15,6 +15,7 @@ import {
 import type { DriverStatus, Order, OrderStatus, Route, VendorStatus, Vehicle } from "../types/database";
 import { formatDate, formatDateTime, rupiah } from "../lib/format";
 import { Badge, cn, type BadgeTone } from "./ui";
+import { BrandIcon } from "./Logo";
 
 // ------------------------------------------------------------------ Tone helpers
 
@@ -276,11 +277,9 @@ export function TicketView({
       {/* Header */}
       <div className="bg-gradient-to-r from-brand-500 via-brand-400 to-leaf-500 px-5 sm:px-6 py-4 flex items-center justify-between gap-3">
         <div className="flex items-center gap-2.5 text-white">
-          <span className="grid h-9 w-9 place-items-center rounded-xl bg-white/20 backdrop-blur">
-            <Car className="h-5 w-5" />
-          </span>
+          <BrandIcon className="h-9 w-9" />
           <div>
-            <p className="font-extrabold leading-none tracking-tight">E-TIKET RUTEKAMI</p>
+            <p className="font-extrabold leading-none tracking-tight">E-TIKET RUTETRIP</p>
             <p className="text-[11px] text-white/80 mt-1">RuteTrip · transaksi aman escrow</p>
           </div>
         </div>
