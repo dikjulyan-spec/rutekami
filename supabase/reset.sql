@@ -1,5 +1,5 @@
 -- =====================================================================
--- Travondo Platform — RESET DATABASE (drop semua tabel lalu mulai bersih)
+-- RuteTrip Platform — RESET DATABASE (drop semua tabel lalu mulai bersih)
 --
 -- GUNAKAN bila schema kamu dalam kondisi tidak konsisten / error seperti
 -- "column vendor_id does not exist" / "relation does not exist".

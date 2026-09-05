@@ -57,7 +57,7 @@ export function VehicleImage({
   return (
     <div
       className={cn(
-        "relative overflow-hidden bg-gradient-to-br from-brand-100 via-orange-50 to-leaf-100 grid place-items-center",
+        "relative overflow-hidden bg-gradient-to-br from-brand-100 via-teal-50 to-leaf-100 grid place-items-center",
         className
       )}
     >
@@ -280,8 +280,8 @@ export function TicketView({
             <Car className="h-5 w-5" />
           </span>
           <div>
-            <p className="font-extrabold leading-none tracking-tight">E-TIKET TRAVONDO</p>
-            <p className="text-[11px] text-white/80 mt-1">NusaTravelLab · transaksi aman escrow</p>
+            <p className="font-extrabold leading-none tracking-tight">E-TIKET RUTEKAMI</p>
+            <p className="text-[11px] text-white/80 mt-1">RuteTrip · transaksi aman escrow</p>
           </div>
         </div>
         <div className="text-right">

@@ -78,8 +78,8 @@ function ConnectGate({ onSaved }: { onSaved: () => void }) {
             <Car className="h-6 w-6" />
           </span>
           <div>
-            <h1 className="text-2xl font-extrabold tracking-tight text-lagoon-900">Travondo Platform</h1>
-            <p className="text-[12px] font-bold uppercase tracking-[0.16em] text-stone-400">NusaTravelLab · hubungkan database</p>
+            <h1 className="text-2xl font-extrabold tracking-tight text-lagoon-900">RuteTrip Platform</h1>
+            <p className="text-[12px] font-bold uppercase tracking-[0.16em] text-stone-400">RuteTrip · hubungkan database</p>
           </div>
         </div>
 
@@ -87,7 +87,7 @@ function ConnectGate({ onSaved }: { onSaved: () => void }) {
           <div className="card p-6 sm:p-8 animate-rise">
             <p className="text-lg font-extrabold text-lagoon-900">Selamat datang 👋</p>
             <p className="text-sm text-stone-500 mt-1.5 leading-relaxed">
-              Travondo adalah ekosistem transportasi multi-portal — Booking, Partner armada, Super
+              RuteTrip adalah ekosistem transportasi multi-portal — Booking, Partner armada, Super
               Admin HQ, dan Driver. Seluruh data & transaksi (escrow, komisi, payout) dikelola
               PostgreSQL Supabase. Tanpa kredensial, aplikasi ini hanya menampilkan layar ini.
             </p>
@@ -190,7 +190,7 @@ export function BackdropDecor() {
       <div className="absolute inset-0 bg-hero-warm" />
       <div className="blob left-[-7rem] top-16 h-80 w-80 bg-brand-300/30" />
       <div className="blob right-[-8rem] top-1/4 h-96 w-96 bg-leaf-300/30" />
-      <div className="blob bottom-[-9rem] left-1/3 h-80 w-80 bg-amber-300/25" />
+      <div className="blob bottom-[-9rem] left-1/3 h-80 w-80 bg-teal-300/25" />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 -- =====================================================================
--- Travondo Platform — Seed Data Contoh
+-- RuteTrip Platform — Seed Data Contoh
 -- Jalankan SETELAH schema.sql. Semua id memakai UUID tetap agar mudah
 -- dilacak. Saldo wallet vendor dihitung OTOMATIS oleh trigger:
 -- pesanan 'Selesai' mengkredit 90%, payout 'Selesai' mengurangi saldo.
@@ -80,7 +80,7 @@ insert into public.payouts (id, vendor_id, amount, bank_name, account_number, ac
 
 -- ---------------------------------------------------------------- SETTINGS
 insert into public.settings (key, value, updated_at) values
-('platform_name',       'Travondo',                    now()),
+('platform_name',       'RuteTrip',                    now()),
 ('commission_rate',     '10',                          now()),
 ('midtrans_client_key', 'SB-Mid-client-xxxxxxxx',      now()),
 ('midtrans_server_key', '•••••••••••••••••••',         now()),

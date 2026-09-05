@@ -1,5 +1,5 @@
 /**
- * Travondo Platform — Data Models & Typescript Interfaces
+ * RuteTrip Platform — Data Models & Typescript Interfaces
  *
  * Catatan: nama properti sengaja mengikuti nama kolom PostgreSQL (snake_case)
  * agar hasil query PostgREST/Supabase dapat langsung dipakai tanpa mapping.

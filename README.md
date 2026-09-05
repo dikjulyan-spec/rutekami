@@ -1,4 +1,4 @@
-# 🚗 Travondo Platform — NusaTravelLab
+# 🚗 RuteTrip Platform — Explore · Plan · Journey
 
 Aplikasi ekosistem transportasi terpadu **multi-portal** dalam build statis **MPA (multi-page app)**:
 **Booking**, **Partner (vendor armada)**, **Super Admin HQ**, dan **Driver (app lapangan)**.
@@ -117,6 +117,6 @@ Mode prototype memakai **anon key + policy RLS longgar** (`for all to anon`). Un
 
 ---
 
-*Dibuat untuk NusaTravelLab — ekosistem transportasi Indonesia: sewa mobil lepas kunci/dengan
+*Dibuat untuk Explore · Plan · Journey — ekosistem transportasi Indonesia: sewa mobil lepas kunci/dengan
 sopir, shuttle antarkota, escrow & komisi platform, dan operasional driver.*
 

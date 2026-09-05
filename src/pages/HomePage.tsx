@@ -22,7 +22,7 @@ import { fetchVendors, insertVendor } from "../lib/db";
 import type { Vendor } from "../types/database";
 
 const BENEFITS: { icon: React.ComponentType<{ className?: string }>; t: string; d: string }[] = [
-  { icon: Users, t: "Jangkauan lebih luas", d: "Unit & trayek Anda tampil di seluruh penjuru platform Travondo." },
+  { icon: Users, t: "Jangkauan lebih luas", d: "Unit & trayek Anda tampil di seluruh penjuru platform RuteTrip." },
   { icon: Wallet, t: "Escrow & payout otomatis", d: "Dana aman di escrow — 90% masuk saldo Anda saat perjalanan selesai." },
   { icon: ShieldCheck, t: "Verifikasi KYC resmi", d: "Setelah QC Admin, status terverifikasi membuka akses penuh ke katalog." },
   { icon: Truck, t: "Kelola armada fleksibel", d: "Atur unit, trayek, sopir, harga, dan pantau omzet dalam satu dashboard." },
@@ -46,13 +46,13 @@ function Hero() {
       <div className="absolute right-16 bottom-0 h-28 w-28 rounded-full bg-leaf-200/20 blur-xl" />
       <div className="relative max-w-2xl">
         <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wider backdrop-blur">
-          <Sparkles className="h-3.5 w-3.5" /> NusaTravelLab · Platform
+          <Sparkles className="h-3.5 w-3.5" /> RuteTrip · Platform
         </span>
         <h1 className="mt-4 text-3xl sm:text-4xl font-extrabold leading-tight tracking-tight">
           Mitra Armada, Tingkatkan Bisnis Anda
         </h1>
         <p className="mt-3 text-[15px] text-white/85 leading-relaxed max-w-xl">
-          Bergabunglah dengan ekosistem Travondo. Sewa mobil & travel antarkota Anda menjangkau
+          Bergabunglah dengan ekosistem RuteTrip. Sewa mobil & travel antarkota Anda menjangkau
           penumpang lebih luas, dengan pembayaran escrow yang aman dan payout otomatis.
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
@@ -102,7 +102,7 @@ function RegisterCTA() {
         <div className="absolute -right-10 -bottom-10 h-36 w-36 rounded-full bg-white/10 blur-2xl" />
         <div className="relative flex flex-wrap items-center justify-between gap-5">
           <div className="max-w-xl">
-            <h2 className="text-2xl font-extrabold tracking-tight">Siap Bergabung dengan Travondo?</h2>
+            <h2 className="text-2xl font-extrabold tracking-tight">Siap Bergabung dengan RuteTrip?</h2>
             <p className="mt-2 text-[14.5px] text-lagoon-100/90 leading-relaxed">
               Isi formulir pendaftaran sekali (lengkap dengan dokumen KYC). Tim Admin akan melakukan
               QC dan mengaktifkan armada Anda.

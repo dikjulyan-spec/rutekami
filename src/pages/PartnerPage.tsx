@@ -147,7 +147,7 @@ export default function PartnerPage() {
     <PortalPage
       kicker="Portal Partner · Vendor Armada"
       title="Kelola armada, trayek, sopir & pendapatan"
-      desc="Omzet masuk escrow Travondo — 90% menjadi saldo bersih Anda otomatis saat pesanan selesai."
+      desc="Omzet masuk escrow RuteTrip — 90% menjadi saldo bersih Anda otomatis saat pesanan selesai."
       icon={<Building2 className="h-6 w-6" />}
       gradient="from-lagoon-600 to-leaf-500"
       actions={

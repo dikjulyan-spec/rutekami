@@ -197,7 +197,7 @@ export default function DriverPage() {
             onClick={() => setTab(t.id)}
             className={cn(
               "flex items-center justify-center gap-1.5 rounded-xl py-2.5 text-[13px] font-extrabold transition",
-              tab === t.id ? "bg-gradient-to-r from-brand-500 to-amber-400 text-white shadow-warm" : "text-stone-500 hover:text-stone-700"
+              tab === t.id ? "bg-gradient-to-r from-brand-600 to-teal-400 text-white shadow-warm" : "text-stone-500 hover:text-stone-700"
             )}
           >
             {t.icon}

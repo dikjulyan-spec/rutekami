@@ -154,7 +154,7 @@ export default function CustomerPage() {
         ) : undefined
       }
       icon={<Ticket className="h-6 w-6" />}
-      gradient="from-brand-500 to-amber-400"
+      gradient="from-brand-600 to-teal-400"
     >
       <FlashBanner flash={flash} />
 
@@ -171,7 +171,7 @@ export default function CustomerPage() {
                 <button
                   className={cn(
                     "flex flex-col items-center gap-0.5 rounded-xl py-2.5 text-[13px] font-extrabold transition",
-                    service === "rental" ? "bg-gradient-to-br from-brand-500 to-amber-400 text-white shadow-warm" : "text-stone-500 hover:text-stone-700"
+                    service === "rental" ? "bg-gradient-to-br from-brand-600 to-teal-400 text-white shadow-warm" : "text-stone-500 hover:text-stone-700"
                   )}
                   onClick={() => setService("rental")}
                 >
@@ -550,7 +550,7 @@ function RentalBookingModal({
       </div>
 
       {/* Kalkulator biaya */}
-      <div className="mt-5 rounded-2xl border border-brand-100 bg-gradient-to-br from-brand-50 to-amber-50 p-4 sm:p-5">
+      <div className="mt-5 rounded-2xl border border-brand-100 bg-gradient-to-br from-brand-50 to-teal-50 p-4 sm:p-5">
         <p className="text-[11px] font-extrabold uppercase tracking-widest text-brand-500 flex items-center gap-1.5">
           <Car className="h-3.5 w-3.5" /> Kalkulator biaya
         </p>

@@ -90,13 +90,13 @@ export default function AdminPage() {
 
   if (ds.loading)
     return (
-      <PortalPage kicker="Super Admin HQ" title="Developer Console Travondo" icon={<ShieldCheck className="h-6 w-6" />}>
+      <PortalPage kicker="Super Admin HQ" title="Developer Console RuteTrip" icon={<ShieldCheck className="h-6 w-6" />}>
         <PageLoader />
       </PortalPage>
     );
   if (ds.error)
     return (
-      <PortalPage kicker="Super Admin HQ" title="Developer Console Travondo" icon={<ShieldCheck className="h-6 w-6" />}>
+      <PortalPage kicker="Super Admin HQ" title="Developer Console RuteTrip" icon={<ShieldCheck className="h-6 w-6" />}>
         <ErrorPanel message={ds.error} onRetry={ds.reload} />
       </PortalPage>
     );
@@ -107,7 +107,7 @@ export default function AdminPage() {
     <PortalPage
       kicker="Super Admin HQ · Developer Console"
       title="Awasi escrow, komisi, KYC & kesehatan sistem"
-      desc="Console pusat NusaTravelLab: semua vendor, seluruh arus uang, dan kontrol kepatuhan platform."
+      desc="Console pusat RuteTrip: semua vendor, seluruh arus uang, dan kontrol kepatuhan platform."
       icon={<ShieldCheck className="h-6 w-6" />}
       gradient="from-lagoon-800 to-brand-600"
     >

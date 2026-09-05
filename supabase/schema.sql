@@ -1,5 +1,5 @@
 -- =====================================================================
--- Travondo Platform (NusaTravelLab) — Skema Database PostgreSQL
+-- RuteTrip Platform (Explore · Plan · Journey) — Skema Database PostgreSQL
 -- Cara pakai: Buka Supabase Dashboard → SQL Editor → tempel & Run.
 -- Jalankan skema ini SEKALI, lalu jalankan seed.sql (data contoh).
 -- =====================================================================
