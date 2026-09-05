@@ -1,6 +1,7 @@
 import React from "react";
 import { cn } from "./ui";
 
+/** Hero header portal (kicker + judul + aksi). */
 export function PortalPage({
   icon,
   gradient = "from-brand-500 to-leaf-500",
@@ -9,7 +10,6 @@ export function PortalPage({
   desc,
   actions,
   children,
-  wide = false,
 }: {
   icon: React.ReactNode;
   gradient?: string;
@@ -18,19 +18,14 @@ export function PortalPage({
   desc?: React.ReactNode;
   actions?: React.ReactNode;
   children: React.ReactNode;
-  wide?: boolean;
 }) {
   return (
-    <div className={cn(wide ? "max-w-6xl" : "max-w-5xl", "mx-auto w-full px-4 sm:px-6 pb-16 pt-6 sm:pt-8")}>
-      {/* Hero header portal */}
+    <div className="mx-auto max-w-6xl px-4 sm:px-6 pb-16 pt-6 sm:pt-8">
       <div className="animate-rise relative overflow-hidden rounded-3xl bg-white shadow-card p-5 sm:p-7">
         <div className={cn("absolute -right-10 -top-16 h-44 w-44 rounded-full bg-gradient-to-br opacity-15 blur-2xl", gradient)} />
         <div className="relative flex flex-wrap items-center gap-4">
           <span
-            className={cn(
-              "grid shrink-0 place-items-center rounded-2xl bg-gradient-to-br text-white shadow-card-lg",
-              gradient
-            )}
+            className={cn("grid shrink-0 place-items-center rounded-2xl bg-gradient-to-br text-white shadow-card-lg", gradient)}
             style={{ height: 52, width: 52 }}
           >
             {icon}
@@ -70,9 +65,7 @@ export function SubTabs<T extends string>({
               onClick={() => onChange(t.id)}
               className={cn(
                 "inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-[13px] font-bold transition whitespace-nowrap border",
-                active
-                  ? "bg-lagoon-900 border-lagoon-900 text-white shadow-card"
-                  : "bg-white border-stone-200 text-stone-500 hover:border-lagoon-300 hover:text-lagoon-800"
+                active ? "bg-lagoon-900 border-lagoon-900 text-white shadow-card" : "bg-white border-stone-200 text-stone-500 hover:border-lagoon-300 hover:text-lagoon-800"
               )}
             >
               {t.icon}
