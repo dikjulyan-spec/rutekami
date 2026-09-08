@@ -1,9 +1,15 @@
 import React from "react";
-// File PNG logo ikon — dari REPO ANDA (mis. Cloudflare Pages build /opt/buildhome/repo/src/assets/logo.png).
+// File PNG logo ikon — dari REPO ANDA (mis. Cloudflare build /opt/buildhome/repo/src/assets/logo.png).
 // Vite memproses import ini & menghasilkan URL aset yang benar saat build/deploy.
 import logoIconUrl from "../assets/logo.png";
 
-/** Ikon simbol RuteTrip (van + pin, tanpa teks) — untuk topbar/footer/e-tiket. */
+/**
+ * Logo RuteTrip.
+ * BrandIcon = ikon van + pin + panah/pita teal (tanpa teks) dipakai di topbar/footer/e-tiket.
+ * BrandLogo = logo penuh (simbol + wordmark "RuteTrip" + tagline "PLAN · JOURNEY · EXPLORE") — tetap SVG inline.
+ */
+
+/** Ikon simbol RuteTrip (van + pin + panah, tanpa teks) — untuk topbar/footer/e-tiket. */
 export function BrandIcon({ className }: { className?: string }) {
   return (
     <img src={logoIconUrl} alt="RuteTrip" className={className} draggable={false} />
