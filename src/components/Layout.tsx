@@ -1,7 +1,7 @@
 import React from "react";
 import { Link2, MapPin, Wrench } from "lucide-react";
 import { BackdropDecor } from "./ConnectGate";
-import { BrandIcon, BrandLogotype } from "./Logo";
+import { BrandLogoImg } from "./Logo";
 
 export type PortalId = "main" | "booking" | "partner" | "admin" | "driver";
 
@@ -13,8 +13,7 @@ export function TopBar({ active }: { active: PortalId }) {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="flex h-16 items-center justify-between gap-3">
           <a href="./index.html" className="flex items-center gap-2.5 text-left shrink-0">
-            <BrandIcon className="h-9 w-9" />
-            <BrandLogotype className="h-6 w-auto" />
+            <BrandLogoImg className="h-11 w-auto" />
           </a>
         </div>
       </div>
@@ -28,8 +27,7 @@ export function Footer() {
     <footer className="border-t border-white/60 py-6 mt-4">
       <div className="mx-auto max-w-6xl px-4 flex flex-wrap items-center justify-between gap-2 text-[12px] text-stone-400">
         <p className="flex items-center gap-1.5">
-          <BrandIcon className="h-5 w-5" />
-          <b className="text-stone-500">RuteTrip Platform</b> · Explore · Plan · Journey
+          <BrandLogoImg className="h-12 w-auto" />
         </p>
         <div className="flex items-center gap-3 text-stone-300">
           <span className="flex items-center gap-1"><MapPin className="h-3.5 w-3.5" /> Indonesia</span>
