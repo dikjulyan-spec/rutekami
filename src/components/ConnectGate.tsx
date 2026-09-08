@@ -8,7 +8,7 @@ import {
   TerminalSquare,
   Unplug,
 } from "lucide-react";
-import { BrandLogo } from "./Logo";
+import { BrandLogoImg } from "./Logo";
 import {
   clearRuntimeConfig,
   getActiveConfig,
@@ -74,7 +74,7 @@ function ConnectGate({ onSaved }: { onSaved: () => void }) {
       <BackdropDecor />
       <div className="mx-auto max-w-5xl px-4 sm:px-6 py-8 sm:py-14">
         <div className="flex flex-col items-center gap-3 text-center animate-rise">
-          <BrandLogo className="w-56 sm:w-72" />
+          <BrandLogoImg className="w-56 sm:w-72" />
           <h1 className="text-2xl font-extrabold tracking-tight text-lagoon-900">RuteTrip Platform</h1>
           <p className="text-[12px] font-bold uppercase tracking-[0.16em] text-stone-400">RuteTrip · hubungkan database</p>
         </div>

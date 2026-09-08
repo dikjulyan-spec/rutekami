@@ -1,7 +1,7 @@
 import React from "react";
 import { Link2, MapPin, Wrench } from "lucide-react";
 import { BackdropDecor } from "./ConnectGate";
-import { BrandIcon } from "./Logo";
+import { BrandIcon, BrandLogoImg } from "./Logo";
 
 export type PortalId = "main" | "booking" | "partner" | "admin" | "driver";
 
@@ -13,11 +13,7 @@ export function TopBar({ active }: { active: PortalId }) {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="flex h-16 items-center justify-between gap-3">
           <a href="./index.html" className="flex items-center gap-2.5 text-left shrink-0">
-            <BrandIcon className="h-9 w-9" />
-            <span className="leading-none">
-              <span className="block text-[17px] font-extrabold tracking-tight text-lagoon-900">Rute<span className="text-teal-500">Trip</span></span>
-              <span className="mt-1 block text-[10px] font-bold uppercase tracking-[0.16em] text-stone-400">Explore · Plan · Journey</span>
-            </span>
+            <BrandLogoImg className="h-10 w-auto" />
           </a>
         </div>
       </div>
