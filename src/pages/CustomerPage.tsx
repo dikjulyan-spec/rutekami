@@ -45,7 +45,7 @@ const TRAVEL_INSURANCE_PER_SEAT = 15000;
 
 type Service = "rental" | "travel";
 
-export default function CustomerPage() {
+export default function CustomerPage({ authState, onRequireAuth }: { authState?: import("../lib/auth").AuthState | null; onRequireAuth?: () => void }) {
   const vendors = useAsyncData(fetchVendors);
   const vehicles = useAsyncData(fetchVehicles);
   const routes = useAsyncData(fetchRoutes);
@@ -347,6 +347,8 @@ export default function CustomerPage() {
           key={`rental-${booking.v.id}`}
           v={booking.v}
           vendorName={vendorById.get(booking.v.vendor_id) ?? "Vendor"}
+          authState={authState}
+          onRequireAuth={onRequireAuth}
           onClose={() => setBooking(null)}
           onDone={(order) => {
             setBooking(null);
@@ -360,6 +362,8 @@ export default function CustomerPage() {
           key={`travel-${booking.r.id}`}
           r={booking.r}
           vendorName={vendorById.get(booking.r.vendor_id) ?? "Vendor"}
+          authState={authState}
+          onRequireAuth={onRequireAuth}
           onClose={() => setBooking(null)}
           onDone={(order) => {
             setBooking(null);
@@ -408,12 +412,16 @@ export default function CustomerPage() {
 function RentalBookingModal({
   v,
   vendorName,
+  authState,
+  onRequireAuth,
   onClose,
   onDone,
   onError,
 }: {
   v: Vehicle;
   vendorName: string;
+  authState?: import("../lib/auth").AuthState | null;
+  onRequireAuth?: () => void;
   onClose: () => void;
   onDone: (o: Order) => void;
   onError: (msg: string) => void;
@@ -448,6 +456,12 @@ function RentalBookingModal({
     if (start && end && end < start) e.end = "Tanggal selesai harus setelah tanggal mulai.";
     setErrors(e);
     if (Object.keys(e).length) return;
+
+    // Wajib login (role booking) sebelum checkout.
+    if (!authState) {
+      onRequireAuth?.();
+      return;
+    }
 
     setSaving(true);
     try {
@@ -599,12 +613,16 @@ function RentalBookingModal({
 function TravelBookingModal({
   r,
   vendorName,
+  authState,
+  onRequireAuth,
   onClose,
   onDone,
   onError,
 }: {
   r: Route;
   vendorName: string;
+  authState?: import("../lib/auth").AuthState | null;
+  onRequireAuth?: () => void;
   onClose: () => void;
   onDone: (o: Order) => void;
   onError: (msg: string) => void;
@@ -631,6 +649,12 @@ function TravelBookingModal({
     if (!date) e.date = "Tanggal wajib diisi.";
     setErrors(e);
     if (Object.keys(e).length) return;
+
+    // Wajib login (role booking) sebelum checkout.
+    if (!authState) {
+      onRequireAuth?.();
+      return;
+    }
 
     setSaving(true);
     try {

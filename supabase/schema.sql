@@ -217,18 +217,16 @@ alter table public.inspections enable row level security;
 alter table public.payouts     enable row level security;
 alter table public.settings    enable row level security;
 
-do $$
+do $
 declare t text;
 begin
   foreach t in array array['vendors','vehicles','routes','drivers','orders','inspections','payouts','settings']
   loop
+    -- Hapus kebijakan anon full access lama (tidak lagi dipakai).
+    -- Kebijakan per-peran yang benar dibuat di supabase/auth_schema.sql.
     execute format('drop policy if exists "anon full access %s" on public.%I', t, t);
-    execute format(
-      'create policy "anon full access %s" on public.%I for all to anon using (true) with check (true)',
-      t, t
-    );
   end loop;
-end $$;
+end $;
 
 -- =====================================================================
 -- STORAGE — bucket foto unit armada (public read, upload via anon)

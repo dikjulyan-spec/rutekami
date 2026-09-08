@@ -1,13 +1,15 @@
 import React from "react";
-import { Link2, MapPin, Wrench } from "lucide-react";
+import { Link2, MapPin, Wrench, LogIn, LogOut } from "lucide-react";
 import { BackdropDecor } from "./ConnectGate";
 import { BrandLogoImg } from "./Logo";
+import { signOut } from "../lib/auth";
 
 export type PortalId = "main" | "booking" | "partner" | "admin" | "driver";
 
-/** Topbar brand + (tanpa menu portal) — navigasi antar portal diakses lewat URL langsung. */
-export function TopBar({ active }: { active: PortalId }) {
+/** Topbar brand + tombol masuk/keluar + status peran. */
+export function TopBar({ active, role, onAuthed }: { active: PortalId; role?: string | null; onAuthed?: () => void }) {
   void active;
+  const handleLogout = async () => { await signOut(); window.location.reload(); };
   return (
     <header className="sticky top-0 z-40 border-b border-white/60 bg-cream/80 backdrop-blur-xl">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -15,6 +17,22 @@ export function TopBar({ active }: { active: PortalId }) {
           <a href="./index.html" className="flex items-center gap-2.5 text-left shrink-0">
             <BrandLogoImg className="h-8 w-auto" />
           </a>
+          <div className="flex items-center gap-2">
+            {role ? (
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1.5 text-[12px] font-bold capitalize text-brand-700 ring-1 ring-brand-100">
+                {role}
+              </span>
+            ) : null}
+            {role ? (
+              <button className="btn-ghost btn-sm" onClick={handleLogout}>
+                <LogOut className="h-4 w-4" /> Keluar
+              </button>
+            ) : (
+              <button className="btn-primary btn-sm" onClick={() => onAuthed?.()} style={{ display: "none" }}>
+                <LogIn className="h-4 w-4" /> Masuk
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </header>
@@ -43,14 +61,18 @@ export function Footer() {
 export function PageShell({
   active,
   children,
+  role,
+  onAuthed,
 }: {
   active: PortalId;
   children: React.ReactNode;
+  role?: string | null;
+  onAuthed?: () => void;
 }) {
   return (
     <div className="relative min-h-screen">
       <BackdropDecor />
-      <TopBar active={active} />
+      <TopBar active={active} role={role} onAuthed={onAuthed} />
       {children}
       <Footer />
     </div>

@@ -53,6 +53,7 @@ import {
   uploadVehicleImage,
 } from "../lib/db";
 import type { NewVehicle } from "../lib/db";
+import { createDriverAccount } from "../lib/auth";
 import type {
   Driver,
   Order,
@@ -967,7 +968,7 @@ function DriversTab({
   reload: () => void;
 }) {
   const [adding, setAdding] = useState(false);
-  const [form, setForm] = useState({ name: "", phone: "" });
+  const [form, setForm] = useState({ name: "", phone: "", email: "", password: "" });
   const [errs, setErrs] = useState<Record<string, string>>({});
   const [busy, setBusy] = useState(false);
 
@@ -975,13 +976,21 @@ function DriversTab({
     const e: Record<string, string> = {};
     if (form.name.trim().length < 3) e.name = "Nama sopir wajib diisi.";
     if (form.phone.replace(/\D/g, "").length < 8) e.phone = "Nomor HP tidak valid.";
+    if (form.email.trim().length < 5 || !form.email.includes("@")) e.email = "Email tidak valid (untuk login sopir).";
+    if (form.password.length < 6) e.password = "Kata sandi minimal 6 karakter.";
     setErrs(e);
     if (Object.keys(e).length) return;
     setBusy(true);
     try {
-      await insertDriver({ vendor_id: scope.vendor.id, name: form.name.trim(), phone: form.phone.trim() });
-      onFlash("ok", "Sopir baru ditambahkan.");
-      setForm({ name: "", phone: "" });
+      const driver = await insertDriver({ vendor_id: scope.vendor.id, name: form.name.trim(), phone: form.phone.trim() });
+      await createDriverAccount({
+        name: form.name.trim(),
+        email: form.email.trim(),
+        password: form.password,
+        driverId: driver.id,
+      });
+      onFlash("ok", "Sopir baru ditambahkan beserta akun loginnya.");
+      setForm({ name: "", phone: "", email: "", password: "" });
       setAdding(false);
       reload();
     } catch (err) {
@@ -1012,7 +1021,7 @@ function DriversTab({
       )}
 
       {adding && (
-        <Modal open onClose={() => setAdding(false)} title="Tambah Sopir" size="sm">
+        <Modal open onClose={() => setAdding(false)} title="Tambah Sopir + Akun Login" size="sm">
           <div className="space-y-4">
             <Labeled label="Nama lengkap" error={errs.name}>
               <Input placeholder="cth: Budi Santoso" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
@@ -1020,9 +1029,16 @@ function DriversTab({
             <Labeled label="No. WhatsApp" error={errs.phone}>
               <Input placeholder="08xxxxxxxxxx" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
             </Labeled>
+            <Labeled label="Email (untuk login Driver)" error={errs.email}>
+              <Input placeholder="budi@email.com" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+            </Labeled>
+            <Labeled label="Kata sandi (untuk login Driver)" error={errs.password}>
+              <Input type="password" placeholder="min. 6 karakter" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
+            </Labeled>
+            <p className="hint">Akun login Driver dibuat otomatis. Sopir memakai email &amp; kata sandi ini untuk masuk ke aplikasi Driver.</p>
             <div className="flex justify-end gap-2 pt-1">
               <button className="btn-ghost" onClick={() => setAdding(false)}>Batal</button>
-              <button className="btn-primary" onClick={add} disabled={busy}>{busy ? "Menyimpan…" : "Simpan Sopir"}</button>
+              <button className="btn-primary" onClick={add} disabled={busy}>{busy ? "Menyimpan…" : "Simpan Sopir & Akun"}</button>
             </div>
           </div>
         </Modal>

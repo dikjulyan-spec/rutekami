@@ -69,7 +69,7 @@ export function getClient(): SupabaseClient {
   if (cachedClient && cachedClient.cfgKey === cfgKey) return cachedClient.client;
 
   const client = createClient(cfg.url, cfg.anonKey, {
-    auth: { persistSession: false, autoRefreshToken: false },
+    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
   });
   cachedClient = { cfgKey, client };
   return client;

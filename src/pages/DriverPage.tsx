@@ -66,7 +66,7 @@ const loadAll = async (): Promise<DData> => {
   return { drivers, orders, vehicles, inspections };
 };
 
-export default function DriverPage() {
+export default function DriverPage({ authState }: { authState?: import("../lib/auth").AuthState | null }) {
   const ds = useAsyncData(loadAll);
   const vendorsDs = useAsyncData(fetchVendors);
   const [tab, setTab] = useState<DriverTab>("tugas");
@@ -75,13 +75,18 @@ export default function DriverPage() {
   const [ticketView, setTicketView] = useState<Order | null>(null);
   const { flash, show } = useFlash();
 
-  // Default driver = driver Online pertama
+  // Driver yang login diikat ke driver_id pada profil (tidak bisa pilih sopir lain).
+  const boundDriverId = authState?.profile.driver_id ?? null;
+
+  // Default driver = milik sopir yang login (dari binding), fallback ke driver Online pertama.
   useEffect(() => {
-    if (!driverId && ds.data?.drivers.length) {
+    if (boundDriverId) {
+      setDriverId(boundDriverId);
+    } else if (!driverId && ds.data?.drivers.length) {
       const first = ds.data.drivers.find((d) => d.status === "Online") ?? ds.data.drivers[0];
       setDriverId(first.id);
     }
-  }, [ds.data, driverId]);
+  }, [ds.data, driverId, boundDriverId]);
 
   const driver = useMemo(
     () => ds.data?.drivers.find((d) => d.id === driverId) ?? null,
@@ -129,7 +134,7 @@ export default function DriverPage() {
                 value={driver?.id ?? ""}
                 onChange={(e) => setDriverId(e.target.value)}
               >
-                {data.drivers.map((d) => (
+                {(boundDriverId ? data.drivers.filter((d) => d.id === boundDriverId) : data.drivers).map((d) => (
                   <option key={d.id} value={d.id}>{d.name}</option>
                 ))}
               </Select>
