@@ -1,7 +1,7 @@
 import React from "react";
 import { Link2, MapPin, Wrench } from "lucide-react";
 import { BackdropDecor } from "./ConnectGate";
-import { BrandLogoImg, BrandLogotype } from "./Logo";
+import { BrandLogoImg } from "./Logo";
 
 export type PortalId = "main" | "booking" | "partner" | "admin" | "driver";
 
@@ -13,7 +13,7 @@ export function TopBar({ active }: { active: PortalId }) {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="flex h-16 items-center justify-between gap-3">
           <a href="./index.html" className="flex items-center gap-2.5 text-left shrink-0">
-            <BrandLogotype className="h-8 w-auto" />
+            <BrandLogoImg className="h-8 w-auto" />
           </a>
         </div>
       </div>
