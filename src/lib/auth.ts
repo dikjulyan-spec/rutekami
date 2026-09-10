@@ -1,4 +1,5 @@
-import { getClient } from "./supabase";
+import { getClient, getActiveConfig } from "./supabase";
+import { createClient } from "@supabase/supabase-js";
 import type { Session, User } from "@supabase/supabase-js";
 
 /**
@@ -50,7 +51,8 @@ export async function signIn(email: string, password: string): Promise<AuthState
 
 export async function signOut(): Promise<void> {
   const sb = getClient();
-  await sb.auth.signOut().catch(() => undefined);
+  // scope 'local': hanya mencabut sesi portal ini (tiap portal punya sesi sendiri).
+  await sb.auth.signOut({ scope: "local" }).catch(() => undefined);
 }
 
 /** Minta email reset password (Supabase Auth). Hanya untuk peran yang mengizinkan self-reset. */
@@ -150,9 +152,17 @@ export async function createDriverAccount(input: {
   driverId: string;
 }): Promise<void> {
   const sb = getClient();
-  // signUp membuat akun auth.users + (via trigger) profil role 'booking'.
-  // Jika email sudah terdaftar, ini melempar error "already registered".
-  const { data, error } = await sb.auth.signUp({
+  const cfg = getActiveConfig();
+  if (!cfg) throw new Error("Supabase belum dikonfigurasi.");
+
+  // PENTING: signUp otomatis membuat sesi login sebagai akun baru. Kalau memakai
+  // client utama, sesi PARTNER yang sedang login akan tertimpa jadi driver.
+  // Karena itu pakai client sementara tanpa persist session.
+  const temp = createClient(cfg.url, cfg.anonKey, {
+    auth: { persistSession: false, autoRefreshToken: false, storageKey: "rutetrip-auth-temp" },
+  });
+
+  const { data, error } = await temp.auth.signUp({
     email: input.email,
     password: input.password,
     options: { data: { full_name: input.name } },
@@ -160,7 +170,8 @@ export async function createDriverAccount(input: {
   if (error) throw new Error(mapAuthError(error.message));
   const userId = data.user?.id;
   if (!userId) throw new Error("Gagal membuat akun driver (mungkin email sudah terdaftar).");
-  // Set role driver + binding driver_id + aktifkan.
+
+  // Set role driver + binding driver_id + aktifkan (via client partner, sesi tetap utuh).
   const { error: perr } = await sb
     .from("profiles")
     .update({ role: "driver", driver_id: input.driverId, full_name: input.name, is_active: true })

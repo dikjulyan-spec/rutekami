@@ -11,7 +11,7 @@ function PartnerRoot() {
   return (
     <PageShell active="partner" role={state?.profile.role ?? null} onAuthed={() => refresh()}>
       <WithSupabase>
-        <RequireAuth allowed={["partner", "admin"]}>
+        <RequireAuth allowed={["partner"]}>
           <PartnerPage />
         </RequireAuth>
       </WithSupabase>
