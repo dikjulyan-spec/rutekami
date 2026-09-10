@@ -54,7 +54,9 @@ $$;
 -- ---------------------------------------------------------------------------
 -- TRIGGER — buat profil otomatis saat akun Supabase dibuat.
 -- ---------------------------------------------------------------------------
+drop trigger if exists on_auth_user_created on auth.users;
 drop function if exists public.handle_new_user();
+
 create or replace function public.handle_new_user()
 returns trigger language plpgsql security definer set search_path = public as $$
 begin
@@ -69,7 +71,6 @@ begin
   return new;
 end $$;
 
-drop trigger if exists on_auth_user_created on auth.users;
 create trigger on_auth_user_created
   after insert on auth.users
   for each row execute function public.handle_new_user();
@@ -98,15 +99,18 @@ create policy "profiles insert by partner for driver"
   on public.profiles for insert to authenticated
   with check (
     public.current_role() = 'admin'
-    or (new.role = 'driver' and public.current_role() = 'partner')
+    or (role = 'driver' and public.current_role() = 'partner')
   );
 
 create policy "profiles update by partner for driver"
   on public.profiles for update to authenticated
-  using (old.role = 'driver' or public.current_role() = 'admin')
+  using (
+    public.current_role() = 'admin'
+    or role = 'driver'
+  )
   with check (
     public.current_role() = 'admin'
-    or (new.role = 'driver' and public.current_role() = 'partner')
+    or (role = 'driver' and public.current_role() = 'partner')
   );
 
 -- ---------------------------------------------------------------------------

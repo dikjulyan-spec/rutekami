@@ -45,7 +45,7 @@ function Hero() {
       <div className="absolute -right-12 -top-12 h-48 w-48 rounded-full bg-white/10 blur-2xl" />
       <div className="absolute right-16 bottom-0 h-28 w-28 rounded-full bg-leaf-200/20 blur-xl" />
       <div className="relative max-w-2xl">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wider backdrop-blur">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-[12px] font-bold uppercase tracking-wider backdrop-blur">
           <Sparkles className="h-3.5 w-3.5" /> RuteTrip · Platform
         </span>
         <h1 className="mt-4 text-3xl sm:text-4xl font-extrabold leading-tight tracking-tight">
@@ -73,7 +73,7 @@ function Benefits() {
   return (
     <section id="keuntungan" className="mt-8">
       <h2 className="text-lg sm:text-xl font-extrabold tracking-tight text-lagoon-900">Keuntungan jadi Mitra</h2>
-      <p className="text-[13px] text-stone-400 mt-0.5">Pendaftaran sederhana — tim Admin kami melakukan QC dokumen Anda.</p>
+      <p className="text-[13px] text-stone-500 mt-0.5">Pendaftaran sederhana — tim Admin kami melakukan QC dokumen Anda.</p>
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         {BENEFITS.map((b, i) => {
           const I = b.icon;

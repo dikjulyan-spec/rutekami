@@ -107,7 +107,7 @@ export function VehicleCard({
       <div className="flex flex-col grow p-4 sm:p-5">
         <div className="flex items-start justify-between gap-2">
           <h3 className="font-extrabold text-stone-800 leading-tight">{v.name}</h3>
-          <span className="text-[11px] font-bold tracking-wider text-stone-400 font-mono whitespace-nowrap mt-0.5">
+          <span className="text-[12px] font-bold tracking-wider text-stone-500 font-mono whitespace-nowrap mt-0.5">
             {v.plate}
           </span>
         </div>
@@ -127,13 +127,13 @@ export function VehicleCard({
           {v.allow_self_drive && (
             <div className="flex justify-between">
               <span className="text-stone-500">Lepas Kunci</span>
-              <span className="font-bold text-stone-700">{rupiah(v.price_per_day)}<span className="font-medium text-stone-400">/hari</span></span>
+              <span className="font-bold text-stone-700">{rupiah(v.price_per_day)}<span className="font-medium text-stone-500">/hari</span></span>
             </div>
           )}
           {v.price_with_driver != null && (
             <div className="flex justify-between">
               <span className="text-stone-500">Dengan Sopir</span>
-              <span className="font-bold text-stone-700">{rupiah(v.price_with_driver)}<span className="font-medium text-stone-400">/hari</span></span>
+              <span className="font-bold text-stone-700">{rupiah(v.price_with_driver)}<span className="font-medium text-stone-500">/hari</span></span>
             </div>
           )}
         </div>
@@ -142,7 +142,7 @@ export function VehicleCard({
         <button className="btn-primary btn-block mt-4" onClick={onBook} disabled={!v.is_active}>
           {v.is_active ? "Pesan Sekarang" : "Tidak Tersedia"}
         </button>
-        <p className="mt-1.5 text-center text-[11px] text-stone-400">mulai {rupiah(effective)}/hari</p>
+        <p className="mt-1.5 text-center text-[12px] text-stone-500">mulai {rupiah(effective)}/hari</p>
       </div>
     </div>
   );
@@ -172,14 +172,14 @@ export function TravelCard({
               <ArrowRight className="h-4 w-4 text-brand-500" />
               {r.destination}
             </p>
-            <p className="text-[12px] text-stone-400 flex items-center gap-1.5 mt-0.5">
+            <p className="text-[12px] text-stone-500 flex items-center gap-1.5 mt-0.5">
               <Building2 className="h-3 w-3" /> {vendorName} · {r.fleet_type}
             </p>
           </div>
         </div>
         <div className="text-right">
           <p className="font-extrabold text-lagoon-900">{rupiah(r.price_per_seat)}</p>
-          <p className="text-[11px] text-stone-400">/ kursi</p>
+          <p className="text-[12px] text-stone-500">/ kursi</p>
         </div>
       </div>
       <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
@@ -231,24 +231,24 @@ export function OrderListRow({
         <ServiceIcon type={order.type} />
         <div className="min-w-0 grow">
           <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-            <span className="font-mono text-[11px] font-bold tracking-wider text-stone-400">{order.order_code}</span>
+            <span className="font-mono text-[12px] font-bold tracking-wider text-stone-500">{order.order_code}</span>
             <Badge tone={orderTone(order.status)}>{order.status}</Badge>
             {order.checked_in && <Badge tone="brand">✓ Check-in</Badge>}
           </div>
           <p className="font-bold text-stone-800 mt-0.5 leading-snug">{order.title}</p>
           <div className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1 text-[12.5px] text-stone-500">
-            <span className="flex items-center gap-1"><Calendar className="h-3.5 w-3.5 text-stone-400" />{formatDate(order.departure_date)}</span>
-            <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5 text-stone-400" />{order.departure_time}</span>
-            <span className="flex items-center gap-1"><MapPin className="h-3.5 w-3.5 text-stone-400" />{order.pickup_point || "—"}</span>
+            <span className="flex items-center gap-1"><Calendar className="h-3.5 w-3.5 text-stone-500" />{formatDate(order.departure_date)}</span>
+            <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5 text-stone-500" />{order.departure_time}</span>
+            <span className="flex items-center gap-1"><MapPin className="h-3.5 w-3.5 text-stone-500" />{order.pickup_point || "—"}</span>
             {vendorName && (
-              <span className="flex items-center gap-1"><Building2 className="h-3.5 w-3.5 text-stone-400" />{vendorName}</span>
+              <span className="flex items-center gap-1"><Building2 className="h-3.5 w-3.5 text-stone-500" />{vendorName}</span>
             )}
             {extraMeta}
           </div>
         </div>
         <div className="flex flex-col items-end gap-1.5">
           <p className="font-extrabold text-lagoon-900 whitespace-nowrap">{rupiah(order.total_price)}</p>
-          <p className="flex items-center gap-1 text-[11.5px] text-stone-400">
+          <p className="flex items-center gap-1 text-[12px] text-stone-500">
             <Phone className="h-3 w-3" /> {order.customer_name}
           </p>
         </div>
@@ -280,7 +280,7 @@ export function TicketView({
           <BrandLogoImg className="h-8 w-auto" />
           <div>
             <p className="font-extrabold leading-none tracking-tight">E-TIKET RUTETRIP</p>
-            <p className="text-[11px] text-white/80 mt-1">RuteTrip · transaksi aman escrow</p>
+            <p className="text-[12px] text-white/80 mt-1">RuteTrip · transaksi aman escrow</p>
           </div>
         </div>
         <div className="text-right">
@@ -315,7 +315,7 @@ export function TicketView({
         <TicketRow
           label="Titik Penjemputan"
           value={order.pickup_point || "—"}
-          icon={<MapPin className="h-3.5 w-3.5 text-stone-400" />}
+          icon={<MapPin className="h-3.5 w-3.5 text-stone-500" />}
         />
         {order.type === "rental" ? (
           <TicketRow label="Durasi Sewa" value={`${order.duration_days} hari`} />
@@ -341,7 +341,7 @@ export function TicketView({
           </div>
         </div>
 
-        <p className="flex items-center justify-between text-[11px] text-stone-400 pt-1">
+        <p className="flex items-center justify-between text-[12px] text-stone-500 pt-1">
           <span>Diterbitkan {formatDateTime(order.created_at)}</span>
           <span className="font-semibold">Tunjukkan kode ini saat boarding</span>
         </p>
@@ -363,7 +363,7 @@ export function TicketRow({
 }) {
   return (
     <div className="flex items-start justify-between gap-4">
-      <span className="text-stone-400 text-[12.5px] shrink-0 flex items-center gap-1">
+      <span className="text-stone-500 text-[12.5px] shrink-0 flex items-center gap-1">
         {icon}
         {label}
       </span>

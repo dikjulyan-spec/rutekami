@@ -154,7 +154,7 @@ export default function PartnerPage() {
       actions={
         scope?.vendors.length ? (
           <div className="flex items-center gap-2">
-            <span className="text-[12px] font-bold text-stone-400">Bekerja sebagai:</span>
+            <span className="text-[12px] font-bold text-stone-500">Bekerja sebagai:</span>
             <Select
               className="!h-9 !w-auto !pr-8 text-[13px] font-bold"
               value={vendor?.id ?? ""}
@@ -311,7 +311,7 @@ function DashboardTab({
         <div className="space-y-5">
           <CardSection title="Status armada">
             <div className="space-y-2.5">
-              {vehicles.length === 0 && <p className="text-sm text-stone-400">Belum ada unit.</p>}
+              {vehicles.length === 0 && <p className="text-sm text-stone-500">Belum ada unit.</p>}
               {vehicles.slice(0, 4).map((v) => {
                 const busy = usedVehicleIds.has(v.id);
                 return (
@@ -319,7 +319,7 @@ function DashboardTab({
                     <VehicleImage src={v.image_url} alt={v.name} className="h-10 w-14 rounded-lg" iconSize="h-4 w-4" />
                     <div className="min-w-0 grow">
                       <p className="text-[13px] font-bold text-stone-700 truncate">{v.name}</p>
-                      <p className="text-[11px] text-stone-400">{v.plate}</p>
+                      <p className="text-[12px] text-stone-500">{v.plate}</p>
                     </div>
                     <Badge tone={busy ? "info" : v.is_active ? "ok" : "muted"}>
                       {busy ? "Bertugas" : v.is_active ? "Standby" : "Nonaktif"}
@@ -333,9 +333,9 @@ function DashboardTab({
 
           <CardSection title="Wallet & payout">
             <div className="rounded-2xl bg-gradient-to-br from-lagoon-800 to-lagoon-600 p-4 text-white">
-              <p className="text-[11px] font-bold uppercase tracking-widest text-lagoon-100">Saldo bersih tersedia</p>
+              <p className="text-[12px] font-bold uppercase tracking-widest text-lagoon-100">Saldo bersih tersedia</p>
               <p className="mt-1 text-2xl font-extrabold">{rupiah(vendor.wallet_balance)}</p>
-              <p className="mt-1 text-[11.5px] text-lagoon-200">Terkredit otomatis dari pesanan selesai (90% — komisi platform 10%).</p>
+              <p className="mt-1 text-[12px] text-lagoon-200">Terkredit otomatis dari pesanan selesai (90% — komisi platform 10%).</p>
             </div>
             <button className="btn-green btn-block mt-4" onClick={() => onGo("wallet")}>
               <Banknote className="h-4 w-4" /> Tarik dana ke rekening
@@ -365,12 +365,12 @@ function StatTile({
 }) {
   return (
     <div className="card p-4 animate-rise">
-      <div className="flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-wider text-stone-400">
+      <div className="flex items-center gap-2 text-[12px] font-extrabold uppercase tracking-wider text-stone-500">
         <span className={cn("grid h-7 w-7 place-items-center rounded-lg", tone)}>{icon}</span>
         {label}
       </div>
       <p className="mt-2 text-xl sm:text-[22px] font-extrabold tracking-tight text-lagoon-900 truncate">{value}</p>
-      {sub && <p className="mt-0.5 text-[11.5px] text-stone-400 truncate">{sub}</p>}
+      {sub && <p className="mt-0.5 text-[12px] text-stone-500 truncate">{sub}</p>}
     </div>
   );
 }
@@ -467,7 +467,7 @@ function VehicleRow({
           <Badge tone="brand">{v.category}</Badge>
           {!v.is_active && <Badge tone="danger">Nonaktif</Badge>}
         </div>
-        <p className="mt-0.5 flex flex-wrap items-center gap-x-3 gap-y-0.5 text-[12px] text-stone-400">
+        <p className="mt-0.5 flex flex-wrap items-center gap-x-3 gap-y-0.5 text-[12px] text-stone-500">
           <span className="font-mono">{v.plate}</span>
           <span>{v.seats} kursi · {v.luggage} bagasi · {v.transmission}</span>
           <span className="flex items-center gap-1"><MapPin className="h-3 w-3" />{v.cities.join(", ") || "—"}</span>
@@ -475,8 +475,8 @@ function VehicleRow({
       </div>
       <div className="flex items-center gap-3 text-right">
         <div className="text-[12px] leading-tight">
-          <p className="font-extrabold text-lagoon-900">{rupiah(v.price_per_day)}<span className="text-stone-400">/hari</span></p>
-          <p className="text-stone-400">sopir {rupiah(v.price_with_driver ?? v.price_per_day)}/hari</p>
+          <p className="font-extrabold text-lagoon-900">{rupiah(v.price_per_day)}<span className="text-stone-500">/hari</span></p>
+          <p className="text-stone-500">sopir {rupiah(v.price_with_driver ?? v.price_per_day)}/hari</p>
         </div>
         <Toggle checked={v.is_active} onChange={toggle} onColor="bg-leaf-500" />
         <button
@@ -606,7 +606,7 @@ function AddVehicleModal({
               {preview ? (
                 <img src={preview} alt="preview" className="h-14 w-20 rounded-xl object-cover" />
               ) : (
-                <span className="grid h-14 w-20 place-items-center rounded-xl bg-stone-100 text-stone-400">
+                <span className="grid h-14 w-20 place-items-center rounded-xl bg-stone-100 text-stone-500">
                   <Truck className="h-5 w-5" />
                 </span>
               )}
@@ -767,13 +767,13 @@ function RouteManageRow({
         <p className="font-extrabold text-stone-800 text-[14px]">{r.origin} → {r.destination}</p>
         <div className="mt-1 flex flex-wrap gap-1.5">
           {r.departures.map((d) => (
-            <span key={d} className="rounded-md bg-white px-1.5 py-0.5 font-mono text-[11px] font-bold text-lagoon-700 ring-1 ring-lagoon-100">{d}</span>
+            <span key={d} className="rounded-md bg-white px-1.5 py-0.5 font-mono text-[12px] font-bold text-lagoon-700 ring-1 ring-lagoon-100">{d}</span>
           ))}
         </div>
       </div>
       <div className="text-right text-[12px]">
-        <p className="font-extrabold text-lagoon-900">{rupiah(r.price_per_seat)}<span className="text-stone-400">/kursi</span></p>
-        <p className="text-stone-400">{r.fleet_type}</p>
+        <p className="font-extrabold text-lagoon-900">{rupiah(r.price_per_seat)}<span className="text-stone-500">/kursi</span></p>
+        <p className="text-stone-500">{r.fleet_type}</p>
       </div>
       <Toggle checked={r.is_active} onChange={toggle} onColor="bg-leaf-500" disabled={busy} />
     </div>
@@ -802,7 +802,7 @@ function OrdersTab({
     <div className="space-y-5">
       <CardSection title="Perlu konfirmasi" desc="Tetapkan sopir & konfirmasi agar perjalanan berjalan.">
         {need.length === 0 ? (
-          <p className="text-sm text-stone-400">Tidak ada pesanan menunggu konfirmasi. 🎉</p>
+          <p className="text-sm text-stone-500">Tidak ada pesanan menunggu konfirmasi. 🎉</p>
         ) : (
           <div className="space-y-3">
             {need.map((o) => (
@@ -814,7 +814,7 @@ function OrdersTab({
 
       <CardSection title="Sedang berjalan" desc="Tandai selesai saat tugas selesai — 90% otomatis masuk wallet.">
         {running.length === 0 ? (
-          <p className="text-sm text-stone-400">Tidak ada perjalanan aktif.</p>
+          <p className="text-sm text-stone-500">Tidak ada perjalanan aktif.</p>
         ) : (
           <div className="space-y-3">
             {running.map((o) => (
@@ -914,7 +914,7 @@ function OrderActionRow({
       <div className="flex flex-wrap gap-3">
         <div className="min-w-0 grow">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="font-mono text-[11px] font-bold text-stone-400">{o.order_code}</span>
+            <span className="font-mono text-[12px] font-bold text-stone-500">{o.order_code}</span>
             <Badge tone={orderTone(o.status)}>{o.status}</Badge>
           </div>
           <p className="font-bold text-stone-800 mt-0.5">{o.title}</p>
@@ -927,7 +927,7 @@ function OrderActionRow({
         {o.status === "Perlu Konfirmasi" && (
           <>
             <div className="flex items-center gap-2">
-              <UserRound className="h-4 w-4 text-stone-400" />
+              <UserRound className="h-4 w-4 text-stone-500" />
               <Select className="!h-9 !w-auto !text-[13px]" value={driverId} onChange={(e) => setDriverId(e.target.value)}>
                 <option value="">Pilih sopir…</option>
                 {assignable.map((d) => (
@@ -1076,7 +1076,7 @@ function DriverRow({
       <span className="avatar h-11 w-11 text-[14px]">{initials}</span>
       <div className="min-w-0 grow">
         <p className="font-extrabold text-stone-800">{d.name}</p>
-        <p className="text-[12px] text-stone-400">{d.phone || "—"}</p>
+        <p className="text-[12px] text-stone-500">{d.phone || "—"}</p>
       </div>
       <div className="flex items-center gap-2">
         <Badge tone={driverTone(d.status)}>{d.status}</Badge>
@@ -1181,7 +1181,7 @@ function WalletTab({
               <b className="text-stone-800">{rupiah(v)}</b>
             </div>
           ))}
-          <p className="border-t border-stone-100 pt-2 text-[11.5px] text-stone-400">
+          <p className="border-t border-stone-100 pt-2 text-[12px] text-stone-500">
             Angka dihitung langsung dari tabel <code className="font-mono">orders</code> (Supabase), bukan perkiraan.
           </p>
         </div>
@@ -1225,11 +1225,11 @@ function PayoutRow({ p }: { p: Payout }) {
       </span>
       <div className="min-w-0 grow">
         <p className="font-extrabold text-stone-800">{rupiah(p.amount)}</p>
-        <p className="text-[12px] text-stone-400">{p.bank_name} · {p.account_number} · {p.account_name}</p>
+        <p className="text-[12px] text-stone-500">{p.bank_name} · {p.account_number} · {p.account_name}</p>
       </div>
       <div className="text-right">
         <Badge tone={tone as "ok" | "danger" | "info" | "warn"}>{p.status}</Badge>
-        <p className="text-[10.5px] text-stone-400 mt-1">{formatDateTime(p.created_at)}</p>
+        <p className="text-[12px] text-stone-500 mt-1">{formatDateTime(p.created_at)}</p>
       </div>
     </div>
   );

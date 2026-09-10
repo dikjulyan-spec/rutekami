@@ -46,7 +46,7 @@ export function Spinner({ className = "" }: { className?: string }) {
 
 export function PageLoader({ label = "Memuat data…" }: { label?: string }) {
   return (
-    <div className="flex flex-col items-center justify-center gap-3 py-20 text-stone-400">
+    <div className="flex flex-col items-center justify-center gap-3 py-20 text-stone-500">
       <Spinner className="h-7 w-7" />
       <p className="text-sm font-medium">{label}</p>
     </div>
@@ -121,7 +121,7 @@ export function EmptyState({
         {icon ?? <Inbox className="h-7 w-7" />}
       </span>
       <p className="font-bold text-stone-700 mt-1">{title}</p>
-      {desc && <p className="text-sm text-stone-400 max-w-sm">{desc}</p>}
+      {desc && <p className="text-sm text-stone-500 max-w-sm">{desc}</p>}
       {children}
     </div>
   );
@@ -146,11 +146,11 @@ export function StatCard({
     <div className="card p-4 sm:p-5 animate-rise">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="text-[11px] font-bold uppercase tracking-wider text-stone-400">{label}</p>
+          <p className="text-[12px] font-bold uppercase tracking-wider text-stone-500">{label}</p>
           <p className="mt-1.5 text-xl sm:text-2xl font-extrabold tracking-tight text-lagoon-900 truncate">
             {value}
           </p>
-          {sub && <div className="mt-1 text-xs text-stone-400">{sub}</div>}
+          {sub && <div className="mt-1 text-xs text-stone-500">{sub}</div>}
         </div>
         <span className={cn("grid h-10 w-10 shrink-0 place-items-center rounded-xl", iconClass)}>
           {icon}
@@ -205,7 +205,7 @@ export function Modal({
         <div className="flex items-start justify-between gap-4 px-5 sm:px-7 pt-5 sm:pt-6 pb-4 border-b border-stone-100">
           <div className="min-w-0">
             <h3 className="text-lg font-extrabold tracking-tight text-lagoon-900 leading-snug">{title}</h3>
-            {subtitle && <p className="text-[13px] text-stone-400 mt-0.5">{subtitle}</p>}
+            {subtitle && <p className="text-[13px] text-stone-500 mt-0.5">{subtitle}</p>}
           </div>
           <button
             className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-stone-100 text-stone-500 hover:bg-stone-200 transition"
@@ -325,7 +325,7 @@ export function SectionHead({
     <div className="flex flex-wrap items-end justify-between gap-3">
       <div>
         <h2 className="text-lg sm:text-xl font-extrabold tracking-tight text-lagoon-900">{title}</h2>
-        {desc && <p className="text-sm text-stone-400 mt-0.5">{desc}</p>}
+        {desc && <p className="text-sm text-stone-500 mt-0.5">{desc}</p>}
       </div>
       {action}
     </div>

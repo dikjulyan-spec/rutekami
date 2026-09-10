@@ -291,13 +291,13 @@ export default function CustomerPage({ authState, onRequireAuth }: { authState?:
                   <h3 className="font-extrabold text-stone-800 flex items-center gap-2">
                     <FileSearch className="h-[18px] w-[18px] text-brand-500" /> Pesanan & e-Tiket saya
                   </h3>
-                  <p className="text-[12.5px] text-stone-400 mt-0.5">
+                  <p className="text-[12.5px] text-stone-500 mt-0.5">
                     Cari berdasarkan nomor handphone (min. 3 digit) atau kode booking.
                   </p>
                 </div>
                 <div className="flex w-full max-w-sm gap-2">
                   <div className="relative grow">
-                    <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-stone-300" />
+                    <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-stone-400" />
                     <Input
                       className="pl-10"
                       placeholder="0812… atau TRV-…"
@@ -512,8 +512,8 @@ function RentalBookingModal({
                     scheme === "self" ? "border-brand-400 bg-brand-50" : "border-stone-200 hover:border-stone-300"
                   )}
                 >
-                  <p className="text-[12px] font-bold text-stone-400 uppercase">Lepas Kunci</p>
-                  <p className="font-extrabold text-stone-800 text-[15px]">{rupiah(v.price_per_day)}<span className="text-[11px] text-stone-400">/hari</span></p>
+                  <p className="text-[12px] font-bold text-stone-500 uppercase">Lepas Kunci</p>
+                  <p className="font-extrabold text-stone-800 text-[15px]">{rupiah(v.price_per_day)}<span className="text-[12px] text-stone-500">/hari</span></p>
                 </button>
               )}
               {v.price_with_driver != null && (
@@ -525,8 +525,8 @@ function RentalBookingModal({
                     scheme === "driver" ? "border-brand-400 bg-brand-50" : "border-stone-200 hover:border-stone-300"
                   )}
                 >
-                  <p className="text-[12px] font-bold text-stone-400 uppercase">Dengan Sopir</p>
-                  <p className="font-extrabold text-stone-800 text-[15px]">{rupiah(v.price_with_driver ?? v.price_per_day)}<span className="text-[11px] text-stone-400">/hari</span></p>
+                  <p className="text-[12px] font-bold text-stone-500 uppercase">Dengan Sopir</p>
+                  <p className="font-extrabold text-stone-800 text-[15px]">{rupiah(v.price_with_driver ?? v.price_per_day)}<span className="text-[12px] text-stone-500">/hari</span></p>
                 </button>
               )}
             </div>
@@ -565,7 +565,7 @@ function RentalBookingModal({
 
       {/* Kalkulator biaya */}
       <div className="mt-5 rounded-2xl border border-brand-100 bg-gradient-to-br from-brand-50 to-teal-50 p-4 sm:p-5">
-        <p className="text-[11px] font-extrabold uppercase tracking-widest text-brand-500 flex items-center gap-1.5">
+        <p className="text-[12px] font-extrabold uppercase tracking-widest text-brand-500 flex items-center gap-1.5">
           <Car className="h-3.5 w-3.5" /> Kalkulator biaya
         </p>
         <div className="mt-2.5 space-y-1.5 text-sm">
@@ -576,7 +576,7 @@ function RentalBookingModal({
           <label className="flex items-center justify-between gap-3 rounded-xl bg-white/70 px-3.5 py-2.5 cursor-pointer">
             <span className="flex items-center gap-2 text-stone-600">
               <ShieldCheck className="h-4 w-4 text-leaf-600" />
-              Proteksi asuransi perjalanan <span className="text-stone-400">(5%)</span>
+              Proteksi asuransi perjalanan <span className="text-stone-500">(5%)</span>
             </span>
             <input type="checkbox" className="h-[18px] w-[18px] accent-brand-500" checked={insurance} onChange={(e) => setInsurance(e.target.checked)} />
           </label>
@@ -591,7 +591,7 @@ function RentalBookingModal({
             <span>{rupiah(total)}</span>
           </div>
         </div>
-        <p className="mt-2 text-[11.5px] text-stone-400">
+        <p className="mt-2 text-[12px] text-stone-500">
           {hasBoth ? "Bisa pilih lepas kunci atau dengan sopir." : v.allow_self_drive ? "Unit ini hanya tersedia lepas kunci." : "Unit ini disewakan lengkap dengan sopir."}
           {" "}Komisi platform 10% dibayar vendor saat perjalanan selesai — bukan dari Anda.
         </p>
@@ -749,7 +749,7 @@ function TravelBookingModal({
       </div>
 
       <div className="mt-5 rounded-2xl border border-leaf-100 bg-gradient-to-br from-leaf-50 to-lagoon-50 p-4 sm:p-5">
-        <p className="text-[11px] font-extrabold uppercase tracking-widest text-leaf-600 flex items-center gap-1.5">
+        <p className="text-[12px] font-extrabold uppercase tracking-widest text-leaf-600 flex items-center gap-1.5">
           <Users className="h-3.5 w-3.5" /> Kalkulator biaya
         </p>
         <div className="mt-2.5 space-y-1.5 text-sm">

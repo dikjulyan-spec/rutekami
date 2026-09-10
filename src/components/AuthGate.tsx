@@ -174,7 +174,7 @@ function AuthGate({ onAuthed, mode }: { onAuthed: () => void; mode: Role }) {
                   <div>
                     <label className="label">Email</label>
                     <div className="relative">
-                      <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-stone-400" />
+                      <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-stone-500" />
                       <input className="input pl-10 font-mono text-[13px]" type="email" placeholder="nama@email.com" value={email} onChange={(e) => setEmail(e.target.value)} spellCheck={false} />
                     </div>
                   </div>
@@ -281,7 +281,7 @@ function AuthGate({ onAuthed, mode }: { onAuthed: () => void; mode: Role }) {
                 </span>
                 <div>
                   <p className="text-[15px] font-extrabold text-lagoon-900">Masuk Portal {meta.label}</p>
-                  <p className="text-[12px] text-stone-400">{meta.desc}</p>
+                  <p className="text-[12px] text-stone-500">{meta.desc}</p>
                 </div>
               </div>
 
@@ -308,7 +308,7 @@ function AuthGate({ onAuthed, mode }: { onAuthed: () => void; mode: Role }) {
                 <div>
                   <label className="label">Email</label>
                   <div className="relative">
-                    <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-stone-400" />
+                    <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-stone-500" />
                     <input className="input pl-10 font-mono text-[13px]" type="email" placeholder="nama@email.com" value={email} onChange={(e) => setEmail(e.target.value)} spellCheck={false} />
                   </div>
                 </div>
@@ -316,7 +316,7 @@ function AuthGate({ onAuthed, mode }: { onAuthed: () => void; mode: Role }) {
                 <div>
                   <label className="label">Kata Sandi</label>
                   <div className="relative">
-                    <Lock className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-stone-400" />
+                    <Lock className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-stone-500" />
                     <input className="input pl-10" type="password" placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} />
                   </div>
                 </div>
@@ -327,7 +327,7 @@ function AuthGate({ onAuthed, mode }: { onAuthed: () => void; mode: Role }) {
                   {busy ? "Memproses…" : (tab === "login" ? (<><LogIn className="h-4 w-4" /> Masuk</>) : (<><UserIcon className="h-4 w-4" /> Daftar</>))}
                 </button>
 
-                <p className="text-[12px] text-stone-400 leading-relaxed">
+                <p className="text-[12px] text-stone-500 leading-relaxed">
                   Belum punya akun {mode}?{" "}
                   {mode === "booking" ? "Daftar di atas." :
                    mode === "driver" ? "Akun dibuat oleh mitra tempat kamu bekerja." :
@@ -342,7 +342,7 @@ function AuthGate({ onAuthed, mode }: { onAuthed: () => void; mode: Role }) {
                     </button>
                   )}
                   {mode === "driver" && (
-                    <span className="text-[11.5px] text-stone-400">Lupa password? Konfirmasi ke partner.</span>
+                    <span className="text-[12px] text-stone-500">Lupa password? Konfirmasi ke partner.</span>
                   )}
                 </div>
               </div>
@@ -360,7 +360,7 @@ function AuthGate({ onAuthed, mode }: { onAuthed: () => void; mode: Role }) {
             <li className="flex gap-2"><Users className="h-4 w-4 text-brand-500 shrink-0" /><span><b>Driver</b>: dibuat oleh mitra (email+password diisi mitra).</span></li>
             <li className="flex gap-2"><ShieldCheck className="h-4 w-4 text-brand-500 shrink-0" /><span><b>Admin</b>: dibuat manual di DB / SQL.</span></li>
           </ul>
-          <p className="text-[12.5px] text-stone-400">Hubungi admin untuk akun Partner/Driver/Admin.</p>
+          <p className="text-[12.5px] text-stone-500">Hubungi admin untuk akun Partner/Driver/Admin.</p>
         </div>
       </Modal>
     </div>

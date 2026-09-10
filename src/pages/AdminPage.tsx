@@ -251,7 +251,7 @@ function Ringkasan({
                 detail="Midtrans / Xendit / WhatsApp"
               />
             </div>
-            <p className="mt-4 rounded-xl bg-stone-50 px-3.5 py-2.5 text-[12px] text-stone-400">
+            <p className="mt-4 rounded-xl bg-stone-50 px-3.5 py-2.5 text-[12px] text-stone-500">
               <b className="text-stone-500">Catatan:</b> angka GMV/komisi/escrow dihitung real-time dari tabel <code className="font-mono">orders</code>. Komisi dikredit ke escrow platform otomatis lewat trigger <code className="font-mono">handle_order_completion</code> saat status pesanan berubah jadi "Selesai".
             </p>
           </CardSection>
@@ -275,7 +275,7 @@ function Ringkasan({
             {events.length > 0 && (
               <div className="mt-4 space-y-2">
                 {events.map((ev, i) => (
-                  <div key={i} className="flex items-start gap-2 rounded-xl bg-lagoon-950/95 px-3.5 py-2.5 font-mono text-[11px] text-leaf-300">
+                  <div key={i} className="flex items-start gap-2 rounded-xl bg-lagoon-950/95 px-3.5 py-2.5 font-mono text-[12px] text-leaf-300">
                     <TerminalSquare className="h-3.5 w-3.5 mt-0.5 shrink-0" />
                     <span>{ev}</span>
                   </div>
@@ -319,12 +319,12 @@ function Ringkasan({
 function Met({ label, value, sub, icon, tone }: { label: string; value: string; sub?: string; icon: React.ReactNode; tone: string }) {
   return (
     <div className="card p-4 animate-rise">
-      <p className="text-[10.5px] font-extrabold uppercase tracking-wider text-stone-400 flex items-center gap-1.5">
+      <p className="text-[12px] font-extrabold uppercase tracking-wider text-stone-500 flex items-center gap-1.5">
         <span className={cn("grid h-6 w-6 place-items-center rounded-md", tone)}>{icon}</span>
         {label}
       </p>
       <p className="mt-1.5 text-[17px] sm:text-xl font-extrabold tracking-tight text-lagoon-900 truncate">{value}</p>
-      {sub && <p className="text-[11px] text-stone-400 truncate">{sub}</p>}
+      {sub && <p className="text-[12px] text-stone-500 truncate">{sub}</p>}
     </div>
   );
 }
@@ -353,7 +353,7 @@ function HealthItem({
   detail: string;
 }) {
   const color =
-    state === "ok" ? "text-leaf-600 bg-leaf-50" : state === "err" ? "text-rose-600 bg-rose-50" : state === "warn" ? "text-amber-600 bg-amber-50" : "text-stone-400 bg-stone-100";
+    state === "ok" ? "text-leaf-600 bg-leaf-50" : state === "err" ? "text-rose-600 bg-rose-50" : state === "warn" ? "text-amber-600 bg-amber-50" : "text-stone-500 bg-stone-100";
   const dot = state === "ok" ? "bg-leaf-500" : state === "err" ? "bg-rose-500" : state === "warn" ? "bg-amber-500" : state === "check" ? "bg-brand-400 animate-pulse" : "bg-stone-300";
   return (
     <div className="rounded-2xl border border-stone-100 bg-stone-50/60 p-3.5">
@@ -361,7 +361,7 @@ function HealthItem({
         <span className={cn("grid h-7 w-7 place-items-center rounded-lg", color)}>{icon}</span>
         <p className="text-[12.5px] font-bold text-stone-700">{label}</p>
       </div>
-      <p className="mt-2 flex items-center gap-1.5 text-[11.5px] text-stone-400">
+      <p className="mt-2 flex items-center gap-1.5 text-[12px] text-stone-500">
         <span className={cn("h-1.5 w-1.5 rounded-full", dot)} />
         {detail}
       </p>
@@ -427,8 +427,8 @@ function KycTab({
                           {v.status === "verified" ? "Terverifikasi" : v.status === "pending" ? "Menunggu audit" : "Ditolak"}
                         </Badge>
                       </div>
-                      <p className="text-[12.5px] text-stone-400 mt-0.5">{v.owner_name} · {v.city} · {v.phone || "—"} · {v.email || "—"}</p>
-                      <p className="text-[11.5px] text-stone-400 mt-0.5">Terdaftar {formatDateTime(v.created_at)}</p>
+                      <p className="text-[12.5px] text-stone-500 mt-0.5">{v.owner_name} · {v.city} · {v.phone || "—"} · {v.email || "—"}</p>
+                      <p className="text-[12px] text-stone-500 mt-0.5">Terdaftar {formatDateTime(v.created_at)}</p>
                     </div>
                   </div>
                   {v.status !== "verified" && (
@@ -464,8 +464,8 @@ function KycTab({
                           </>
                         ) : (
                           <>
-                            <Ban className="h-4 w-4 text-stone-300 shrink-0" />
-                            <span className="text-stone-300">{label} belum diunggah</span>
+                            <Ban className="h-4 w-4 text-stone-400 shrink-0" />
+                            <span className="text-stone-400">{label} belum diunggah</span>
                           </>
                         )}
                       </div>
@@ -623,7 +623,7 @@ function ArmadaAdminTab({
                       {vendor ? vendor.business_name : "—"}
                     </Badge>
                   </div>
-                  <p className="text-[12px] text-stone-400 mt-0.5 font-mono">{v.plate} · {rupiah(v.price_per_day)}/hari</p>
+                  <p className="text-[12px] text-stone-500 mt-0.5 font-mono">{v.plate} · {rupiah(v.price_per_day)}/hari</p>
                 </div>
                 <button
                   className={cn("btn-sm", v.is_active ? "btn-ghost" : "btn-danger")}
@@ -714,7 +714,7 @@ function IntegrasiTab({
           </div>
         </CardSection>
         <CardSection title="Catatan produksi">
-          <ul className="space-y-2 text-[12.5px] text-stone-400 list-disc list-inside leading-relaxed">
+          <ul className="space-y-2 text-[12.5px] text-stone-500 list-disc list-inside leading-relaxed">
             <li>Server keys sebaiknya hanya di backend (Supabase Edge Functions / Vault), bukan di frontend.</li>
             <li>Aktifkan Supabase Auth & ganti policy RLS demo dengan per-role.</li>
             <li>Webhook signature harus diverifikasi sebelum memercayai payload.</li>

@@ -31,9 +31,9 @@ export function PortalPage({
             {icon}
           </span>
           <div className="min-w-0 grow">
-            <p className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-brand-500">{kicker}</p>
+            <p className="text-[12px] font-extrabold uppercase tracking-[0.14em] text-brand-500">{kicker}</p>
             <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-lagoon-900">{title}</h1>
-            {desc && <p className="text-[13.5px] text-stone-400 mt-0.5 max-w-2xl">{desc}</p>}
+            {desc && <p className="text-[13.5px] text-stone-500 mt-0.5 max-w-2xl">{desc}</p>}
           </div>
           {actions && <div className="flex flex-wrap items-center gap-2">{actions}</div>}
         </div>
@@ -98,7 +98,7 @@ export function CardSection({
         <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
           <div>
             <h3 className="font-extrabold text-stone-800 tracking-tight">{title}</h3>
-            {desc && <p className="text-[12.5px] text-stone-400 mt-0.5">{desc}</p>}
+            {desc && <p className="text-[12.5px] text-stone-500 mt-0.5">{desc}</p>}
           </div>
           {action}
         </div>

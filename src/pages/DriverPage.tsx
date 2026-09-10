@@ -138,7 +138,7 @@ export default function DriverPage({ authState }: { authState?: import("../lib/a
                   <option key={d.id} value={d.id}>{d.name}</option>
                 ))}
               </Select>
-              <p className="text-[11.5px] text-lagoon-100/80 truncate">{vendorName || "—"} · {driver?.phone || ""}</p>
+              <p className="text-[12px] text-lagoon-100/80 truncate">{vendorName || "—"} · {driver?.phone || ""}</p>
             </div>
           </div>
           <Badge tone={driver ? driverTone(driver.status) : "muted"} className="bg-white/15 ring-white/20 !text-white">
@@ -153,7 +153,7 @@ export default function DriverPage({ authState }: { authState?: import("../lib/a
               <p className="text-[13px] font-extrabold leading-tight">
                 {driver?.status === "Online" ? "Mode Online aktif" : "Kamu sedang tidak online"}
               </p>
-              <p className="text-[10.5px] text-lagoon-100/70">
+              <p className="text-[12px] text-lagoon-100/70">
                 {driver?.status === "Online" ? "Tugas masuk real-time dari partner." : "Aktifkan untuk menerima penugasan."}
               </p>
             </div>
@@ -353,18 +353,18 @@ function JobCard({
         <ServiceIcon type={o.type} />
         <div className="min-w-0 grow">
           <div className="flex flex-wrap items-center gap-1.5">
-            <span className="font-mono text-[10.5px] font-bold text-stone-400">{o.order_code}</span>
+            <span className="font-mono text-[12px] font-bold text-stone-500">{o.order_code}</span>
             <Badge tone={orderTone(o.status)}>{o.status}</Badge>
             {insp && <Badge tone="brand">Inspeksi ✓</Badge>}
           </div>
           <p className="font-extrabold text-stone-800 text-[14px] leading-snug mt-0.5">{o.title}</p>
           <div className="mt-1.5 space-y-1 text-[12px] text-stone-500">
-            <p className="flex items-center gap-1.5"><Calendar className="h-3.5 w-3.5 text-stone-300" /> {formatDate(o.departure_date)} · {o.departure_time}</p>
-            <p className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5 text-stone-300" /> {o.pickup_point || "—"}</p>
-            <p className="flex items-center gap-1.5"><Phone className="h-3.5 w-3.5 text-stone-300" /> {o.customer_name} · {o.customer_phone || "—"}</p>
-            {vehicleName && <p className="flex items-center gap-1.5"><Car className="h-3.5 w-3.5 text-stone-300" /> {vehicleName}</p>}
+            <p className="flex items-center gap-1.5"><Calendar className="h-3.5 w-3.5 text-stone-400" /> {formatDate(o.departure_date)} · {o.departure_time}</p>
+            <p className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5 text-stone-400" /> {o.pickup_point || "—"}</p>
+            <p className="flex items-center gap-1.5"><Phone className="h-3.5 w-3.5 text-stone-400" /> {o.customer_name} · {o.customer_phone || "—"}</p>
+            {vehicleName && <p className="flex items-center gap-1.5"><Car className="h-3.5 w-3.5 text-stone-400" /> {vehicleName}</p>}
             {insp && insp.km_start > 0 && (
-              <p className="flex items-center gap-1.5"><ClipboardCheck className="h-3.5 w-3.5 text-stone-300" /> KM awal {insp.km_start.toLocaleString("id-ID")} · BBM {insp.fuel_start}</p>
+              <p className="flex items-center gap-1.5"><ClipboardCheck className="h-3.5 w-3.5 text-stone-400" /> KM awal {insp.km_start.toLocaleString("id-ID")} · BBM {insp.fuel_start}</p>
             )}
           </div>
         </div>
@@ -647,7 +647,7 @@ function ScannerTab({
           <QrCode className="h-7 w-7" />
         </span>
         <p className="mt-3 font-extrabold text-stone-800">Pindai / Validasi e-Tiket</p>
-        <p className="text-[12.5px] text-stone-400 mt-1">
+        <p className="text-[12.5px] text-stone-500 mt-1">
           Masukkan kode booking dari aplikasi Customer. Cocokkan nama penumpang sebelum boarding.
         </p>
         <div className="mt-4 flex gap-2">
@@ -691,17 +691,17 @@ function ScannerTab({
           </div>
 
           <div className="rounded-2xl border border-stone-100 bg-white p-4 shadow-card text-sm space-y-2">
-            <p className="flex justify-between"><span className="text-stone-400">Penumpang</span><b>{result.customer_name}</b></p>
-            <p className="flex justify-between"><span className="text-stone-400">Kontak</span><b>{result.customer_phone || "—"}</b></p>
-            <p className="flex justify-between"><span className="text-stone-400">Layanan</span><b>{result.title}</b></p>
-            <p className="flex justify-between"><span className="text-stone-400">Jadwal</span><b>{formatDate(result.departure_date)} {result.departure_time}</b></p>
-            <p className="flex justify-between gap-3"><span className="text-stone-400 shrink-0">Penjemputan</span><b className="text-right">{result.pickup_point || "—"}</b></p>
-            <p className="flex justify-between"><span className="text-stone-400">Total</span><b>{rupiah(result.total_price)}</b></p>
-            <p className="flex justify-between"><span className="text-stone-400">Status</span><Badge tone={orderTone(result.status)}>{result.status}</Badge></p>
+            <p className="flex justify-between"><span className="text-stone-500">Penumpang</span><b>{result.customer_name}</b></p>
+            <p className="flex justify-between"><span className="text-stone-500">Kontak</span><b>{result.customer_phone || "—"}</b></p>
+            <p className="flex justify-between"><span className="text-stone-500">Layanan</span><b>{result.title}</b></p>
+            <p className="flex justify-between"><span className="text-stone-500">Jadwal</span><b>{formatDate(result.departure_date)} {result.departure_time}</b></p>
+            <p className="flex justify-between gap-3"><span className="text-stone-500 shrink-0">Penjemputan</span><b className="text-right">{result.pickup_point || "—"}</b></p>
+            <p className="flex justify-between"><span className="text-stone-500">Total</span><b>{rupiah(result.total_price)}</b></p>
+            <p className="flex justify-between"><span className="text-stone-500">Status</span><Badge tone={orderTone(result.status)}>{result.status}</Badge></p>
           </div>
 
           {driver.status !== "Online" && result.status === "Sedang Berjalan" && (
-            <p className="text-[11.5px] text-stone-400 text-center">Tips: aktifkan Mode Online agar pencatatan tugas konsisten.</p>
+            <p className="text-[12px] text-stone-500 text-center">Tips: aktifkan Mode Online agar pencatatan tugas konsisten.</p>
           )}
 
           {result.status === "Sedang Berjalan" && !result.checked_in && (
@@ -756,16 +756,16 @@ function HistoryTab({
                 <ServiceIcon type={o.type} />
                 <div className="min-w-0 grow">
                   <div className="flex flex-wrap items-center gap-1.5">
-                    <span className="font-mono text-[10.5px] font-bold text-stone-400">{o.order_code}</span>
+                    <span className="font-mono text-[12px] font-bold text-stone-500">{o.order_code}</span>
                     <Badge tone="ok">Selesai</Badge>
                   </div>
                   <p className="font-bold text-stone-800 text-[13.5px] leading-snug mt-0.5">{o.title}</p>
-                  <p className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-0.5 text-[11.5px] text-stone-400">
+                  <p className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-0.5 text-[12px] text-stone-500">
                     <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{formatDateTime(o.created_at)}</span>
                     <span className="flex items-center gap-1"><Phone className="h-3 w-3" />{o.customer_name}</span>
                   </p>
                   {insp && (
-                    <p className="mt-1 rounded-lg bg-leaf-50 px-2.5 py-1.5 text-[11px] text-leaf-700">
+                    <p className="mt-1 rounded-lg bg-leaf-50 px-2.5 py-1.5 text-[12px] text-leaf-700">
                       Inspeksi: KM {insp.km_start.toLocaleString("id-ID")} → {insp.km_end?.toLocaleString("id-ID") ?? "—"} · BBM {insp.fuel_start} → {insp.fuel_end ?? "—"} · {insp.body_condition}{insp.damage_notes ? ` · ${insp.damage_notes}` : ""}
                     </p>
                   )}

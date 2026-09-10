@@ -76,7 +76,7 @@ function ConnectGate({ onSaved }: { onSaved: () => void }) {
         <div className="flex flex-col items-center gap-3 text-center animate-rise">
           <BrandLogoImg className="w-56 sm:w-72" />
           <h1 className="text-2xl font-extrabold tracking-tight text-lagoon-900">RuteTrip Platform</h1>
-          <p className="text-[12px] font-bold uppercase tracking-[0.16em] text-stone-400">RuteTrip · hubungkan database</p>
+          <p className="text-[12px] font-bold uppercase tracking-[0.16em] text-stone-500">RuteTrip · hubungkan database</p>
         </div>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-[1.1fr_1fr] items-start">
@@ -94,7 +94,7 @@ function ConnectGate({ onSaved }: { onSaved: () => void }) {
                   <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-600 ring-1 ring-brand-100">{s.icon}</span>
                   <div className="min-w-0">
                     <p className="text-sm font-bold text-stone-800"><span className="text-brand-500">{i + 1}. </span>{s.t}</p>
-                    <p className="text-[12.5px] text-stone-400 leading-relaxed">{s.d}</p>
+                    <p className="text-[12.5px] text-stone-500 leading-relaxed">{s.d}</p>
                   </div>
                 </li>
               ))}
@@ -110,7 +110,7 @@ function ConnectGate({ onSaved }: { onSaved: () => void }) {
 
           <div className="card p-6 sm:p-8 animate-rise">
             <p className="text-base font-extrabold text-lagoon-900">Hubungkan Supabase</p>
-            <p className="text-[13px] text-stone-400 mt-1">
+            <p className="text-[13px] text-stone-500 mt-1">
               Tempel <b>Project URL</b> & <b>anon public key</b> (Project Settings → API). Disimpan
               di browser Anda — aman dipakai karena anon key memang untuk publikasi frontend.
             </p>
@@ -173,7 +173,7 @@ function ConnectGate({ onSaved }: { onSaved: () => void }) {
             <li className="flex gap-2"><CheckCircle2 className="h-4 w-4 text-leaf-500 shrink-0" /><span>Isi <code className="font-mono text-[12px] bg-stone-100 px-1.5 rounded">VITE_SUPABASE_URL</code> & <code className="font-mono text-[12px] bg-stone-100 px-1.5 rounded">VITE_SUPABASE_ANON_KEY</code>.</span></li>
             <li className="flex gap-2"><CheckCircle2 className="h-4 w-4 text-leaf-500 shrink-0" /><span>Jalankan <code className="font-mono text-[12px] bg-stone-100 px-1.5 rounded">npm run build</code> lalu deploy folder <code className="font-mono text-[12px] bg-stone-100 px-1.5 rounded">dist/</code>.</span></li>
           </ol>
-          <p className="text-[12.5px] text-stone-400">Kredensial runtime (form di halaman ini) berguna untuk pratinjau cepat tanpa rebuild.</p>
+          <p className="text-[12.5px] text-stone-500">Kredensial runtime (form di halaman ini) berguna untuk pratinjau cepat tanpa rebuild.</p>
         </div>
       </Modal>
     </div>
