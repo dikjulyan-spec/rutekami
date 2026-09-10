@@ -22,6 +22,7 @@ import {
   ShieldCheck,
   TerminalSquare,
   Users,
+  UserPlus,
   Wallet,
   XCircle,
 } from "lucide-react";
@@ -41,6 +42,7 @@ import {
 import { OrderListRow, TicketView, VehicleImage, driverTone, vendorTone } from "../components/items";
 import { useAsyncData, useFlash } from "../lib/hooks";
 import { getClient, getStorageBucket } from "../lib/supabase";
+import { createPartnerAccount } from "../lib/auth";
 import {
   fetchOrders,
   fetchPayouts,
@@ -382,6 +384,7 @@ function KycTab({
 }) {
   const [armed, setArmed] = useState<{ id: string; act: "verify" | "reject" } | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
+  const [accountFor, setAccountFor] = useState<Vendor | null>(null);
 
   const act = async (v: Vendor, kind: "verify" | "reject") => {
     if (armed?.id !== v.id || armed.act !== kind) {
@@ -431,7 +434,7 @@ function KycTab({
                       <p className="text-[12px] text-stone-500 mt-0.5">Terdaftar {formatDateTime(v.created_at)}</p>
                     </div>
                   </div>
-                  {v.status !== "verified" && (
+                  {v.status !== "verified" ? (
                     <div className="flex gap-2">
                       <button
                         className={cn(armed?.id === v.id && armed.act === "reject" ? "btn-danger" : "btn-ghost", "btn-sm")}
@@ -448,6 +451,10 @@ function KycTab({
                         <CheckCircle2 className="h-3.5 w-3.5" /> {armed?.id === v.id && armed.act === "verify" ? "Yakin verifikasi?" : "Verifikasi"}
                       </button>
                     </div>
+                  ) : (
+                    <button className="btn-soft btn-sm" onClick={() => setAccountFor(v)}>
+                      <UserPlus className="h-3.5 w-3.5" /> Buat Akun Login
+                    </button>
                   )}
                 </div>
 
@@ -477,11 +484,89 @@ function KycTab({
           })}
         </div>
       )}
+
+      {accountFor && (
+        <CreatePartnerAccountModal
+          vendor={accountFor}
+          onClose={() => setAccountFor(null)}
+          onDone={(email) => {
+            setAccountFor(null);
+            onFlash("ok", `Akun login partner dibuat untuk ${email}. Mitra bisa masuk ke portal Partner.`);
+          }}
+          onError={(m) => onFlash("err", m)}
+        />
+      )}
     </CardSection>
   );
 }
 
-/* =========================================================== Pesanan escrow */
+/* ------------------------------------------- Modal: buat akun login partner */
+
+function CreatePartnerAccountModal({
+  vendor,
+  onClose,
+  onDone,
+  onError,
+}: {
+  vendor: Vendor;
+  onClose: () => void;
+  onDone: (email: string) => void;
+  onError: (m: string) => void;
+}) {
+  const [email, setEmail] = useState(vendor.email || "");
+  const [name, setName] = useState(vendor.owner_name || vendor.business_name);
+  const [password, setPassword] = useState("");
+  const [errs, setErrs] = useState<Record<string, string>>({});
+  const [busy, setBusy] = useState(false);
+
+  const submit = async () => {
+    const e: Record<string, string> = {};
+    if (email.trim().length < 5 || !email.includes("@")) e.email = "Email tidak valid.";
+    if (name.trim().length < 2) e.name = "Nama wajib diisi.";
+    if (password.length < 6) e.password = "Kata sandi minimal 6 karakter.";
+    setErrs(e);
+    if (Object.keys(e).length) return;
+    setBusy(true);
+    try {
+      await createPartnerAccount({
+        email: email.trim(),
+        password,
+        name: name.trim(),
+        vendorId: vendor.id,
+      });
+      onDone(email.trim());
+    } catch (err) {
+      onError(err instanceof Error ? err.message : String(err));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <Modal open onClose={onClose} title="Buat Akun Login Partner" subtitle={vendor.business_name} size="sm">
+      <div className="space-y-4">
+        <p className="rounded-xl bg-brand-50 px-3.5 py-2.5 text-[12.5px] text-brand-800 ring-1 ring-brand-100 leading-relaxed">
+          Akun ini dipakai mitra untuk masuk ke <b>portal Partner</b>. Vendor otomatis terikat ke akun ini.
+        </p>
+        <Labeled label="Nama pemilik / penanggung jawab" error={errs.name}>
+          <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="cth: Budi Santoso" />
+        </Labeled>
+        <Labeled label="Email login" error={errs.email}>
+          <Input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="mitra@email.com" />
+        </Labeled>
+        <Labeled label="Kata sandi" error={errs.password}>
+          <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="min. 6 karakter" />
+        </Labeled>
+        <div className="flex justify-end gap-2 pt-1">
+          <button className="btn-ghost" onClick={onClose}>Batal</button>
+          <button className="btn-primary" onClick={submit} disabled={busy}>
+            {busy ? "Membuat…" : "Buat Akun"}
+          </button>
+        </div>
+      </div>
+    </Modal>
+  );
+}
 
 function OrdersAdminTab({
   data,

@@ -179,6 +179,37 @@ export async function createDriverAccount(input: {
   if (perr) throw new Error(`Gagal mengatur role driver: ${perr.message}`);
 }
 
+/** Admin membuat akun login untuk mitra (partner) yang sudah terverifikasi. */
+export async function createPartnerAccount(input: {
+  email: string;
+  password: string;
+  name: string;
+  vendorId: string;
+}): Promise<void> {
+  const cfg = getActiveConfig();
+  if (!cfg) throw new Error("Supabase belum dikonfigurasi.");
+  const sb = getClient();
+
+  // Client sementara: signUp membuat sesi baru yang tidak boleh menimpa sesi admin.
+  const temp = createClient(cfg.url, cfg.anonKey, {
+    auth: { persistSession: false, autoRefreshToken: false, storageKey: "rutetrip-auth-temp" },
+  });
+  const { data, error } = await temp.auth.signUp({
+    email: input.email,
+    password: input.password,
+    options: { data: { full_name: input.name } },
+  });
+  if (error) throw new Error(mapAuthError(error.message));
+  const userId = data.user?.id;
+  if (!userId) throw new Error("Gagal membuat akun partner (mungkin email sudah terdaftar).");
+
+  const { error: perr } = await sb
+    .from("profiles")
+    .update({ role: "partner", vendor_id: input.vendorId, full_name: input.name, is_active: true })
+    .eq("id", userId);
+  if (perr) throw new Error(`Gagal mengatur role partner: ${perr.message}`);
+}
+
 // ---------------------------------------------------------------------------
 // Error mapping
 // ---------------------------------------------------------------------------

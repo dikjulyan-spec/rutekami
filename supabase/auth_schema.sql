@@ -106,7 +106,7 @@ create policy "profiles update by partner for driver"
   on public.profiles for update to authenticated
   using (
     public.current_role() = 'admin'
-    or role = 'driver'
+    or (public.current_role() = 'partner' and role in ('booking','driver'))
   )
   with check (
     public.current_role() = 'admin'
@@ -172,6 +172,12 @@ create policy "drivers partner write" on public.drivers
   for all to authenticated
   using (public.current_role() = 'partner' and vendor_id = public.current_vendor_id())
   with check (public.current_role() = 'partner' and vendor_id = public.current_vendor_id());
+-- Sopir boleh update barisnya sendiri (toggle duty Online/Offline).
+drop policy if exists "drivers self update" on public.drivers;
+create policy "drivers self update" on public.drivers
+  for update to authenticated
+  using (public.current_role() = 'driver' and id = public.current_driver_id())
+  with check (public.current_role() = 'driver' and id = public.current_driver_id());
 
 -- ORDERS: baca publik, tulis sesuai alur
 drop policy if exists "orders read" on public.orders;

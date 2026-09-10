@@ -100,21 +100,24 @@ const loadAll = async (): Promise<Dataset> => {
   return { vendors, vehicles, routes, drivers, orders, payouts };
 };
 
-export default function PartnerPage() {
+export default function PartnerPage({ authState }: { authState?: import("../lib/auth").AuthState | null }) {
   const ds = useAsyncData(loadAll);
   const [tab, setTab] = useState<PartnerTab>("dashboard");
+  // Partner terikat ke vendor_id dari profilnya (tidak bisa pilih vendor lain).
+  const boundVendorId = authState?.profile.vendor_id ?? null;
   const [vendorId, setVendorId] = useState<string | null>(null);
   const [ticketOrder, setTicketOrder] = useState<Order | null>(null);
   const { flash, show } = useFlash();
 
-  // Default vendor = vendor terverifikasi pertama
+  // Prioritas: vendor dari profil login; jika tidak ada (mis. admin), pakai vendor terverifikasi pertama.
   useEffect(() => {
-    if (!vendorId && ds.data?.vendors.length) {
-      const first =
-        ds.data.vendors.find((v) => v.status === "verified") ?? ds.data.vendors[0];
+    if (boundVendorId) {
+      setVendorId(boundVendorId);
+    } else if (!vendorId && ds.data?.vendors.length) {
+      const first = ds.data.vendors.find((v) => v.status === "verified") ?? ds.data.vendors[0];
       setVendorId(first.id);
     }
-  }, [ds.data, vendorId]);
+  }, [ds.data, vendorId, boundVendorId]);
 
   const vendor = useMemo(
     () => ds.data?.vendors.find((v) => v.id === vendorId) ?? null,
@@ -152,20 +155,26 @@ export default function PartnerPage() {
       icon={<Building2 className="h-6 w-6" />}
       gradient="from-lagoon-600 to-leaf-500"
       actions={
-        scope?.vendors.length ? (
+        vendor ? (
           <div className="flex items-center gap-2">
-            <span className="text-[12px] font-bold text-stone-500">Bekerja sebagai:</span>
-            <Select
-              className="!h-9 !w-auto !pr-8 text-[13px] font-bold"
-              value={vendor?.id ?? ""}
-              onChange={(e) => setVendorId(e.target.value)}
-            >
-              {scope.vendors.map((v) => (
-                <option key={v.id} value={v.id}>
-                  {v.business_name} ({v.status})
-                </option>
-              ))}
-            </Select>
+            <span className="text-[12px] font-bold text-stone-500">Vendor:</span>
+            {boundVendorId ? (
+              <span className="inline-flex items-center gap-1.5 rounded-xl bg-brand-50 px-3 py-1.5 text-[13px] font-bold text-brand-700 ring-1 ring-brand-100">
+                {vendor.business_name}
+              </span>
+            ) : (
+              <Select
+                className="!h-9 !w-auto !pr-8 text-[13px] font-bold"
+                value={vendor?.id ?? ""}
+                onChange={(e) => setVendorId(e.target.value)}
+              >
+                {(scope?.vendors ?? []).map((v) => (
+                  <option key={v.id} value={v.id}>
+                    {v.business_name} ({v.status})
+                  </option>
+                ))}
+              </Select>
+            )}
           </div>
         ) : undefined
       }
